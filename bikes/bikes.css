@@ -1,0 +1,779 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+  box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    width: 100vw;
+    max-width: 100vw;
+    overflow-x: hidden;
+    background: #f8f9fa;
+}     
+        .header {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: white;
+            padding: 1rem 0;
+            position: relative;
+            /* overflow: hidden; */
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            90% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Helps space out nav items */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            padding: 1rem 2rem; /* Uncomment to give some breathing room */
+            z-index: 1000; /* Ensures it stays above other content */
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            float: left;
+            z-index: 1;
+        }
+        
+        .menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            z-index: 1;
+            float: left;
+        }
+        
+        .menu a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+            font-size: 1.3rem;
+            font-family: monospace;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+        
+        .menu a:hover, .menu a.active {
+            background: rgba(240, 186, 128, 0.803);
+            transition: all 0.7s ease-in-out;
+            
+            
+        }
+        .login-btn {
+            background: rgba(255,255,255,0.2);
+            border: 2px solid white;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            margin-left: 1rem;
+            height: 40px;
+        }
+        
+        .login-btn:hover {
+            background: white;
+            color: #ff6b35;
+        }
+        h1{
+            font-size: 2.5rem;
+            font-family: monospace;
+            margin-bottom: 1rem;
+            margin-top: 40px;
+            text-align: center;
+            color: #333;
+        }
+        .fa{
+            font-size: 1.5rem;
+            margin-left: 0.5rem;
+        }
+     .container1 {
+    max-width: 100%;
+    margin: 2%, 2%;
+    padding:5%;
+    display: grid;
+    grid-template-columns: 2fr 350px;
+    gap: 2.5rem;
+    align-items: flex-start;
+}
+
+
+
+.bikes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 2rem;
+}
+
+        .bike-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            /* cursor: pointer; */
+        }
+
+        .bike-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .bike-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .bike-info {
+            padding: 1.5rem;
+        }
+
+        .bike-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .bike-details {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .bike-price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #ff6b35;
+            margin-top: 1rem;
+        }
+        .pay-btn, .chat-btn {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            
+            /* transition: transform 0.3s, background 0.3s; */
+            
+        }
+        .pay-btn:hover, .chat-btn:hover {
+            transform: translateY(-2px);
+            background: #f7931e;
+        }
+
+        .filters {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            height: fit-content;
+            position: sticky;
+            top: 2rem;
+        }
+
+        .filters h3 {
+            color: #333;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .filter-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .filter-group select,
+        .filter-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .filter-group select:focus,
+        .filter-group input:focus {
+            outline: none;
+            border-color: #ff6b35;
+        }
+
+        .price-range {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .price-range input {
+            width: 45%;
+        }
+
+        .filter-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .filter-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .reset-btn {
+            width: 100%;
+            background: #ff6b35;
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            transition: background 0.3s;
+        }
+
+        .reset-btn:hover {
+            background: #5a6268;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .no-results {
+            text-align: center;
+            color: #666;
+            font-size: 1.2rem;
+            margin-top: 2rem;
+        }
+
+
+@media (max-width: 1100px) {
+    .container1 {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    .filters {
+        position: static;
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .container1 {
+        padding: 0 0.5rem;
+    }
+    .bikes-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    .filters {
+        padding: 1rem;
+    }
+}
+.menu .dropdown {
+    position: relative;
+}
+
+.menu .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #ffa500;
+    min-width: 160px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    transition: box-shadow 0.3s;
+    z-index: 100;
+}
+
+.menu .dropdown:hover .dropdown-menu,
+.menu .dropdown:focus-within .dropdown-menu {
+    display: block;
+}
+
+.menu .dropdown-menu li a {
+    color: #333;
+    padding: 12px 20px;
+    display: block;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background 0.2s, color 0.2s;
+}
+
+.menu .dropdown-menu li a:hover {
+    background: #e0e0e0;
+    color: #ff8c00;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}    
+#chatModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.chat-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+}
+
+.chat-container {
+    position: relative;
+    width: 90%;
+    max-width: 500px;
+    height: 80%;
+    max-height: 600px;
+    background: white;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    animation: chatSlideIn 0.3s ease-out;
+}
+
+@keyframes chatSlideIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.chat-header {
+    background: linear-gradient(135deg, #ff6b35, #f7931e);
+    color: white;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-seller-info h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.chat-seller-info p {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.chat-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background 0.3s;
+}
+
+.chat-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+    background: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.message {
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.message.buyer {
+    justify-content: flex-end;
+}
+
+.message.seller {
+    justify-content: flex-start;
+}
+
+.message-content {
+    max-width: 80%;
+    padding: 1rem;
+    border-radius: 20px;
+    position: relative;
+}
+
+.message.buyer .message-content {
+    background: linear-gradient(135deg, #ff6b35, #f7931e);
+    color: white;
+    border-bottom-right-radius: 5px;
+}
+
+.message.seller .message-content {
+    background: white;
+    color: #333;
+    border: 1px solid #e0e0e0;
+    border-bottom-left-radius: 5px;
+}
+
+.message-content p {
+    margin: 0 0 0.5rem 0;
+    line-height: 1.4;
+}
+
+.message-time {
+    font-size: 0.75rem;
+    opacity: 0.7;
+    display: block;
+}
+
+.chat-input-container {
+    padding: 1rem;
+    background: white;
+    border-top: 1px solid #e0e0e0;
+    display: flex;
+    gap: 0.5rem;
+}
+
+#chatInput {
+    flex: 1;
+    padding: 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 25px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+#chatInput:focus {
+    border-color: #ff6b35;
+}
+
+.send-btn {
+    background: linear-gradient(135deg, #ff6b35, #f7931e);
+    color: white;
+    border: none;
+    padding: 1rem 1.5rem;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.3s, background 0.3s;
+}
+
+.send-btn:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #e55a2b, #e0851a);
+}
+
+/* Custom scrollbar for chat messages */
+.chat-messages::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+    background: #ff6b35;
+    border-radius: 3px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb:hover {
+    background: #e55a2b;
+}
+
+@media (max-width: 1100px) {
+    .container1 {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    .filters {
+        position: static;
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .container1 {
+        padding: 0 0.5rem;
+    }
+    .bikes-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    .filters {
+        padding: 1rem;
+    }
+    
+    .chat-container {
+        width: 95%;
+        height: 90%;
+        margin: 0 auto;
+    }
+    
+    .chat-header {
+        padding: 1rem;
+    }
+    
+    .chat-seller-info h3 {
+        font-size: 1rem;
+    }
+    
+    .chat-seller-info p {
+        font-size: 0.8rem;
+    }
+    
+    .message-content {
+        max-width: 90%;
+        padding: 0.8rem;
+    }
+    
+    .chat-input-container {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .send-btn {
+        width: 100%;
+    }
+}
+
+.menu .dropdown {
+    position: relative;
+}
+
+.menu .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #ffa500;
+    min-width: 160px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    transition: box-shadow 0.3s;
+    z-index: 100;
+}
+
+.menu .dropdown:hover .dropdown-menu,
+.menu .dropdown:focus-within .dropdown-menu {
+    display: block;
+}
+
+.menu .dropdown-menu li a {
+    color: #333;
+    padding: 12px 20px;
+    display: block;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background 0.2s, color 0.2s;
+}
+
+.menu .dropdown-menu li a:hover {
+    background: #e0e0e0;
+    color: #ff8c00;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}    
+/* Responsive Styles */
+@media (max-width: 900px) {
+    .header, .nav, .container {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+    .container1 {
+        flex-direction: column;
+        gap: 24px;
+        padding: 0 8px 24px 8px;
+    }
+    .filters {
+        max-width: 100%;
+        width: 100%;
+        margin-bottom: 16px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .menu {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .menu a {
+        padding: 0.5rem 0;
+    }
+    .login-btn {
+        width: 100%;
+        margin-top: 1rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .header, .nav, .container {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+    .container1 {
+        padding: 0 4px 16px 4px;
+    }
+    .bikes-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    h1 {
+        font-size: 22px;
+        margin: 18px 0 10px 0;
+    }
+    .filters {
+        padding: 14px 6px;
+    }
+    .bike-card {
+        padding: 12px;
+    }
+    .bike-title {
+        font-size: 17px;
+    }
+    .bike-price {
+        font-size: 16px;
+    }
+    .pay-btn, .chat-btn, .reset-btn {
+        font-size: 13px;
+        padding: 7px 12px;
+    }
+    
+    .chat-container {
+        width: 98%;
+        height: 95%;
+    }
+    
+    .message-content {
+        padding: 0.7rem;
+        font-size: 0.9rem;
+    }
+    
+    #chatInput {
+        padding: 0.8rem;
+        font-size: 0.9rem;
+    }
+    
+    .send-btn {
+        padding: 0.8rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .header, .nav, .container {
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+    .filters {
+        padding: 8px 2px;
+    }
+    .bike-card {
+        padding: 6px;
+    }
+    .bike-title {
+        font-size: 14px;
+    }
+    .bike-price {
+        font-size: 13px;
+    }
+    
+    .chat-container {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
+    
+    .chat-header {
+        padding: 0.8rem;
+    }
+    
+    .message-content {
+        padding: 0.6rem;
+        font-size: 0.85rem;
+    }
+}

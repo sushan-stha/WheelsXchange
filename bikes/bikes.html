@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WheelsXChange - Find Your Perfect Ride</title>
+    <link rel="stylesheet" href="bikes.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">WheelsXChange</div>
+                <ul class="menu">
+                    <li><a href="../index.html">Home</a></li>
+                    <li class="dropdown"><a href="#buy">Buy</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="../cars/cars.html" onclick="showSection('cars')">Cars</a></li>
+                            <li><a href="./bikes.html" onclick="showSection('bikes')">Bikes</a></li>
+                        </ul>
+                    <li><a href="#sell">Sell</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="../login_form/signup.html" class="login-btn" onclick="showLoginModal()">Login</a></li>
+                </ul>
+            </nav>
+       </div>
+    </header>
+    <h1>Find your perfect ride<i class="fa fa-motorcycle" aria-hidden="true"></i></h1>
+    <div class="container1">
+        <div class="bikes-section">
+            <div class="bikes-grid" id="bikesGrid">
+            </div>
+            <div class="no-results" id="noResults" style="display: none;">
+                No bikes found matching your criteria.
+            </div>
+        </div>
+
+        <div class="filters">
+            <h3>Filter Bikes</h3>
+            
+            <input type="text" class="search-bar" id="searchBar" placeholder="Search by make, model, or seller...">
+            
+            <div class="filter-group">
+                <label for="brand">Brand</label>
+                <select id="brand">
+                    <option value="">All Brands</option>
+                    <option value="Yamaha">Yamaha</option>
+                    <option value="Honda">Honda</option>
+                    <option value="Pulsar">Pulsar</option>
+                    <option value="TVS">TVS</option>
+                    <option value="Suzuki">Suzuki</option>
+                    <option value="CF Moto">CF Moto</option>
+                    <option value="KTM">KTM</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="type">Bike Type</label>
+                <select id="type">
+                    <option value="">All Types</option>
+                    <option value="Naked Sport">Naked Sports</option>
+                    <option value="Touring">Touring</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Commuter">Commuter</option>
+                    <option value="Retro">Retro</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="year">Year</label>
+                <select id="year">
+                    <option value="">All Years</option>
+                    <option value="2024">2024</option>
+                    <option value="2023">2023</option>
+                    <option value="2022">2022</option>
+                    <option value="2021">2021</option>
+                    <option value="2020">2020</option>
+                    <option value="2019">2019</option>
+                    <option value="2019">2018</option>
+                    <option value="2019">2017</option>
+                    <option value="2019">2016</option>
+                    <option value="2019">2015</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label>Price Range</label>
+                <div class="price-range">
+                    <input type="number" id="minPrice" placeholder="Min">
+                    <span>-</span>
+                    <input type="number" id="maxPrice" placeholder="Max">
+                </div>
+            </div>
+
+
+            <div class="filter-group">
+                <label for="running">Km running (km)</label>
+                <input type="number" id="running" placeholder="e.g., 50000">
+            </div>
+
+            <!-- <button class="filter-btn" onclick="applyFilters()">Apply Filters</button> -->
+            <button class="reset-btn" onclick="resetFilters()">Reset Filters</button>
+        </div>
+    </div>
+    <script src="bikes.js"></script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WheelsXChange - Find Your Perfect Ride</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <!-- Font Awesome CDN for social icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">WheelsXChange</div>
+                <ul class="menu">
+                    <li><a href="#home">Home</a></li>
+                    <li class="dropdown"><a href="#buy">Buy</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="./cars/cars.html" onclick="showSection('cars')" target="_blank">Cars</a></li>
+                            <li><a href="./bikes/bikes.html" onclick="showSection('bikes')" target="_blank">Bikes</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#sell">Sell</a></li>
+                    <!-- <li><a href="#pricing">Pricing</a></li> -->
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="./login_form/signup.html" class="login-btn" onclick="showLoginModal()">Login</a></li>
+                </ul>
+            </nav>
+
+            <div class="head">
+                <h1>WHEELS<span style="color: #000;">X</span>CHANGE</h1>
+                <p>FIND YOUR PERFECT RIDE</p>
+                <div class="search">
+                    <input type="text" class="search-input" placeholder="Brand, Model, Year">
+                    <button class="search-btn">Search</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <section class="about-section">
+                <div class="about-text">
+                    <h2>About WheelsXChange</h2>
+                    <p>Welcome to WheelsXChange, your premier destination for buying and selling quality vehicles. We've
+                        revolutionized the car and bike marketplace by creating a trusted platform where car
+                        enthusiasts, dealers, and everyday buyers can connect seamlessly.</p>
+                    <p>Founded with a passion for automotive excellence, we understand that finding the perfect vehicle
+                        is more than just a transaction—it's about discovering your ideal driving companion. Our
+                        comprehensive platform combines cutting-edge technology with personalized service to make your
+                        car buying or selling experience effortless and enjoyable.</p>
+                    <p>Whether you're searching for your first car, upgrading to a luxury vehicle, or looking to sell
+                        your current ride, WheelsXChange provides the tools, security, and support you need every step
+                        of the way.</p>
+                </div>
+
+
+                <div class="logo">
+
+                    <img src="./assets/logo.png" alt="logo">
+
+
+                </div>
+            </section>
+
+            <section class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Smart Search</h3>
+                    <p>Advanced filtering system to help you find exactly what you're looking for. Search by make,
+                        model, year, price range, and more.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Easy Listings</h3>
+                    <p>Every vehicle listing has simple process and it is thoroughly    verified to ensure accuracy and authenticity. Buy with
+                        confidence knowing you're getting genuine deals.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Best Prices</h3>
+                    <p>Our competitive marketplace ensures you get the best deals whether you're buying or selling. No
+                        hidden fees, transparent pricing.</p>
+                </div>
+
+            </section>
+
+            <section class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">1000+</div>
+                    <div class="stat-label">Happy Customers</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Cars Sold</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Sellers</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">4.5★</div>
+                    <div class="stat-label">Average Rating</div>
+                </div>
+            </section>
+
+            <section class="feedbacks">
+                <div class="container">
+                    <h2 style="text-align: center; margin-bottom: 3rem; color: #333;">What Our Customers Say</h2>
+                    <div class="feedback-grid">
+                        <div class="feedback">
+                            <p>"Found my dream car within a week! The process was smooth and the support team was
+                                incredibly helpful throughout."</p>
+                            <div class="feedback-author">- Som Shrestha</div>
+                        </div>
+                        <div class="feedback">
+                            <p>"Sold my car at a great price with no hassle. The platform made it so easy to connect
+                                with serious buyers."</p>
+                            <div class="feedback-author">- Sheetal Shrestha</div>
+                        </div>
+                        <div class="feedback">
+                            <p>"As a dealer, WheelsXChange has expanded our reach significantly. The tools provided are
+                                top-notch."</p>
+                            <div class="feedback-author">- Manakamana Auto Link</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <div id="cars-section" style="display:none;">
+                <h2>Cars for Sale</h2>
+                <!-- Car listings go here -->
+            </div>
+            <div id="bikes-section" style="display:none;">
+                <h2>Bikes for Sale</h2>
+                <!-- Bike listings go here -->
+            </div>
+            
+        </div>
+
+    </main>
+    <footer class="footer">
+        <div class="footer-main">
+            <div class="footer-col">
+                <h3>WheelsXchange</h3>
+                <p>Your trusted marketplace for buying and selling vehicles.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="./cars/cars.html">Browse Cars</a></li>
+                    <li><a href="./bikes/bikes.html">Browse Bikes</a></li>
+                    <li><a href="#">Sell Your Vehicle</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact us</h4>
+                <div class="social">
+                    <a href="https://www.facebook.com/profile.php?id=61578929633014" target="_blank"><i class="fab fa-facebook"> </i></a><br>
+                    <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                    
+                </div>
+                <a>wheelxchange22@gmail.com</a>
+                <p>+977 9742445018/01 6636285</p>
+                <p>Kathmandu, Nepal</p>
+            </div>
+        </div>
+        <div class="footer-end">
+            <p>&copy; 2024 WheelsXChange. All rights reserved.</p>
+        </div>
+    </footer>
+    <script>
+        function showSection(type) {
+            document.getElementById('cars-section').style.display = (type === 'cars') ? 'block' : 'none';
+            document.getElementById('bikes-section').style.display = (type === 'bikes') ? 'block' : 'none';
+        }
+    </script>
+</body>
+
+</html>
