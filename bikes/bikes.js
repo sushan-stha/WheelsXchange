@@ -127,8 +127,23 @@ const bikes = [
                         </div>
                         <div class="bike-price">Rs.${bike.price.toLocaleString()}</div>
                          <div class="bike-actions">
-                         <button class="chat-btn" onclick="openChat(${bike.id})">Chat</button>
-                            <button class="pay-btn" onclick="handlePayment(${bike.id})">Pay Now</button>
+                         <button class="chat-btn" onclick="openChat(${bike.id})">
+                         <lord-icon
+                            src="https://cdn.lordicon.com/wwsllqpi.json"
+                            trigger="hover"
+                            colors="primary:#ff6b35"
+                            style="width:80px;height:50px">
+                        </lord-icon>
+                        </button>
+                            <button class="pay-btn" onclick="handlePayment(${bike.id})">
+                            <lord-icon
+                                    src="https://cdn.lordicon.com/hnzvpwtz.json"
+                                    trigger="morph"
+                                    state="morph-card-cash-2"
+                                    colors="primary:#ff6b35"
+                                    style="width:80px;height:50px">
+                                </lord-icon>
+                            </button>
                         </div>
                     </div>
                 </div>

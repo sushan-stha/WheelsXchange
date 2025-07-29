@@ -11,25 +11,29 @@
 </head>
 
 <body>
-    <header class="header">
-        <div class="container">
-            <nav class="nav">
-                <div class="logo">WheelsXChange</div>
-                <ul class="menu">
-                    <li><a href="#home">Home</a></li>
-                    <li class="dropdown"><a href="#buy">Buy</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="./cars/cars.html" onclick="showSection('cars')" target="_blank">Cars</a></li>
-                            <li><a href="./bikes/bikes.html" onclick="showSection('bikes')" target="_blank">Bikes</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#sell">Sell</a></li>
-                    <!-- <li><a href="#pricing">Pricing</a></li> -->
-                    <li><a href="#contact">Contact</a></li>
-                    <li><a href="./login_form/signup.html" class="login-btn" onclick="showLoginModal()">Login</a></li>
-                </ul>
-            </nav>
+     <header class="header">
+        <nav class="nav">
+            <div class="logo">WheelsXChange</div>
+            <ul class="menu">
+                <li><a href="#home">Home</a></li>
+                <li class="dropdown"><a href="#buy">Buy</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="./cars/cars.html" onclick="showSection('cars')" target="_blank">Cars</a></li>
+                        <li><a href="./bikes/bikes.html" onclick="showSection('bikes')" target="_blank">Bikes</a></li>
+                    </ul>
+                </li>
+                <li><a href="#sell">Sell</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="./login_form/signup.html" class="login-btn" onclick="showLoginModal()">Login</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
 
+        <div class="container">
             <div class="head">
                 <h1>WHEELS<span style="color: #000;">X</span>CHANGE</h1>
                 <p>FIND YOUR PERFECT RIDE</p>
@@ -58,12 +62,8 @@
                         of the way.</p>
                 </div>
 
-
                 <div class="logo">
-
                     <img src="./assets/logo.png" alt="logo">
-
-
                 </div>
             </section>
 
@@ -77,7 +77,7 @@
                 <div class="feature-card">
                     <div class="feature-icon">🛡️</div>
                     <h3>Easy Listings</h3>
-                    <p>Every vehicle listing has simple process and it is thoroughly    verified to ensure accuracy and authenticity. Buy with
+                    <p>Every vehicle listing has simple process and it is thoroughly verified to ensure accuracy and authenticity. Buy with
                         confidence knowing you're getting genuine deals.</p>
                 </div>
                 <div class="feature-card">
@@ -86,7 +86,6 @@
                     <p>Our competitive marketplace ensures you get the best deals whether you're buying or selling. No
                         hidden fees, transparent pricing.</p>
                 </div>
-
             </section>
 
             <section class="stats">
@@ -139,10 +138,9 @@
                 <h2>Bikes for Sale</h2>
                 <!-- Bike listings go here -->
             </div>
-            
         </div>
-
     </main>
+
     <footer class="footer">
         <div class="footer-main">
             <div class="footer-col">
@@ -162,7 +160,6 @@
                 <div class="social">
                     <a href="https://www.facebook.com/profile.php?id=61578929633014" target="_blank"><i class="fab fa-facebook"> </i></a><br>
                     <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
-                    
                 </div>
                 <a>wheelxchange22@gmail.com</a>
                 <p>+977 9742445018/01 6636285</p>
@@ -173,11 +170,20 @@
             <p>&copy; 2024 WheelsXChange. All rights reserved.</p>
         </div>
     </footer>
+
     <script>
         function showSection(type) {
             document.getElementById('cars-section').style.display = (type === 'cars') ? 'block' : 'none';
             document.getElementById('bikes-section').style.display = (type === 'bikes') ? 'block' : 'none';
         }
+
+        // Mobile menu toggle functionality
+        const menuToggle = document.querySelector('.menu-toggle');
+        const menu = document.querySelector('.menu');
+
+        menuToggle.addEventListener('click', () => {
+            menu.classList.toggle('active');
+        });
     </script>
 </body>
 

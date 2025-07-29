@@ -174,8 +174,8 @@ body {
             color: #ff6b35;
             margin-top: 1rem;
         }
-        .pay-btn, .chat-btn {
-            background: linear-gradient(135deg, #ff6b35, #f7931e);
+        .chat-btn {
+            background: none;
             color: white;
             border: none;
             padding: 0.8rem 1.2rem;
@@ -186,9 +186,25 @@ body {
             /* transition: transform 0.3s, background 0.3s; */
             
         }
-        .pay-btn:hover, .chat-btn:hover {
+        .pay-btn{
+            background: none;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            
+            /* transition: transform 0.3s, background 0.3s; */
+            
+        }
+        /* .chat-btn:hover {
             transform: translateY(-2px);
             background: #f7931e;
+        } */
+        .pay-btn:hover{
+            transform: translateY(-2px);
+            background:none;
         }
 
         .filters {
