@@ -64,8 +64,8 @@ async function handleLogin(e) {
         
         // Redirect after successful login
         setTimeout(() => {
-            // Change this to your dashboard page
-            window.location.href = '/dashboard.html';
+    
+            window.location.href = '../index.html';
         }, 1500);
         
     } catch (error) {

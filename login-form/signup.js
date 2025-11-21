@@ -53,7 +53,7 @@ async function handleSignup(e) {
         if (data.user && data.user.identities && data.user.identities.length === 0) {
             showAlert('This email is already registered. Please log in.', 'warning');
             setTimeout(() => {
-                window.location.href = 'login.html';
+                window.location.href = '../index.html';
             }, 2000);
         } else {
             showAlert('Account created! Please check your email to verify your account.', 'success');
