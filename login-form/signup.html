@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Create Account - WheelsXchange</title>
+    <!-- Add this BEFORE your login.js script -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link rel="stylesheet" href="login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
@@ -39,6 +41,9 @@
             Already have an account? <a href="login.html">Sign In</a>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="signup.js"></script>
    <script> 
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.toggle-password').forEach(function(btn) {

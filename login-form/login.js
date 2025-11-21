@@ -19,11 +19,12 @@ function initializeLoginForm() {
 }
 
 // Handle Login Form Submission
-function handleLogin(e) {
+async function handleLogin(e) {
     e.preventDefault();
     
     const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value;
+    const rememberMe = document.getElementById('rememberMe').checked;
     
     // Basic validation
     if (!email || !password) {
@@ -39,29 +40,47 @@ function handleLogin(e) {
     // Show loading state
     showLoadingState();
     
-    // Simulate API call delay
-    setTimeout(() => {
-        try {
-            // Demo login validation
-            if (email === 'demo@autotrade.com' && password === 'demo123') {
-                showAlert('Login successful! Welcome to AutoTrade Dashboard.', 'success');
-                // Simulate redirect after successful login
-                setTimeout(() => {
-                    showAlert('Redirecting to dashboard...', 'info');
-                    // In production, you would redirect here:
-                    // window.location.href = '/dashboard';
-                }, 2000);
-            } else {
-                showAlert('Invalid credentials. Please check your email and password.', 'error');
-            }
-        } catch(error) {
-            console.error('Login error:', error);
-            showAlert('An error occurred during login. Please try again.', 'error');
-        } finally {
-            // Always hide loading state
-            hideLoadingState();
+    try {
+        // Sign in with Supabase
+        const { data, error } = await supabase.auth.signInWithPassword({
+            email: email,
+            password: password,
+        });
+        
+        if (error) {
+            throw error;
         }
-    }, 1500);
+        
+        // Store remember me preference
+        if (rememberMe) {
+            localStorage.setItem('rememberMe', 'true');
+            localStorage.setItem('autotrade_email', email);
+        } else {
+            localStorage.removeItem('rememberMe');
+            localStorage.removeItem('autotrade_email');
+        }
+        
+        showAlert('Login successful! Welcome to WheelsXchange.', 'success');
+        
+        // Redirect after successful login
+        setTimeout(() => {
+            // Change this to your dashboard page
+            window.location.href = '/dashboard.html';
+        }, 1500);
+        
+    } catch (error) {
+        console.error('Login error:', error);
+        
+        if (error.message.includes('Invalid login credentials')) {
+            showAlert('Invalid email or password. Please try again.', 'error');
+        } else if (error.message.includes('Email not confirmed')) {
+            showAlert('Please verify your email before logging in.', 'warning');
+        } else {
+            showAlert('Login failed: ' + error.message, 'error');
+        }
+    } finally {
+        hideLoadingState();
+    }
 }
 // Handle Forgot Password
 function handleForgotPassword(e) {
