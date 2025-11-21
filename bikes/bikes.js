@@ -79,7 +79,7 @@ const bikes = [
                 price: 750000,
                 type: 'Naked Sport',
                 running: 5200,
-                image: 'https://www.team-bhp.com/forum/attachments/motorbikes/2502373d1694507125-3rd-gen-ktm-390-duke-launched-rs-3-11-lakh-smartselect_20230912135144_instagram.jpg',
+                image: 'https://cdn.bikedekho.com/upload/userfiles/images/683dc88809e3b.jpg?tr=w-420',
                 seller: 'Suraj Thapa',
                 location: 'Bhaktapur'
             },
