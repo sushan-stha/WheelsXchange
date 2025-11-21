@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WheelsXChange - Find Your Perfect Ride</title>
     <link rel="stylesheet" href="bikes.css" type="text/css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <header class="header">
@@ -21,7 +21,7 @@
                         </ul>
                     <li><a href="#sell" onclick="openListingModal('bike')">Sell</a></li>
                     <li><a href="#contact">Contact</a></li>
-                    <li><a href="../login_form/signup.html" class="login-btn" onclick="showLoginModal()">Login</a></li>
+                    <li class="login-item"><a href="../login-form/login.html" class="login-btn" onclick="showLoginModal()">Login</a></li>
                 </ul>
             </nav>
        </div>
@@ -104,5 +104,9 @@
         </div>
     </div>
     <script src="bikes.js"></script>
+    <!-- Supabase Auth -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../login-form/supabase-config.js"></script>
+    <script src="../home-auth.js"></script>
 </body>
 </html>

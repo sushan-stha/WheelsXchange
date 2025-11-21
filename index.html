@@ -24,7 +24,7 @@
                 </li>
                 <li><a href="#sell">Sell</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <li><a href="./login-form/login.html" class="login-btn" onclick="showLoginModal()">Login</a></li>
+                <li class="login-item"><a href="./login-form/login.html" class="login-btn" onclick="showLoginModal()">Login</a></li>
             </ul>
             <div class="menu-toggle">
                 <span></span>
@@ -189,9 +189,14 @@
     <!-- ADD THESE THREE LINES -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="./login-form/supabase-config.js"></script>
+    <!-- ADD THIS TEMPORARY TEST -->
+<script>
+    console.log('Supabase available?', typeof supabase !== 'undefined');
+    console.log('Supabase object:', supabase);
+</script>
     <script src="home-auth.js"></script>
     
 </body>
-</body>
+
 
 </html>

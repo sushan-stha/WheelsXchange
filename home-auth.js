@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', async function() {
 });
 
 async function checkUserAuth() {
+    console.log('checkUserAuth called');
+    console.log('Supabase object:', supabase);
     try {
         // Get current user session
         const { data: { session }, error } = await supabase.auth.getSession();
@@ -27,7 +29,7 @@ async function checkUserAuth() {
 
 function updateNavbarForLoggedInUser(user) {
     // Find the login button list item
-    const loginItem = document.querySelector('.menu li:last-child');
+    const loginItem = document.querySelector('.menu .login-item');
     
     if (!loginItem) return;
     
@@ -90,12 +92,27 @@ function addUserProfileStyles() {
         .user-profile-dropdown {
             position: relative;
         }
-        
+            .user-profile-dropdown::after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        height: 10px;
+    }
+        .menu > .login-item {
+        position: relative;
+    }
+
+    .menu > .login-item .user-profile-dropdown {
+        display: flex;
+        align-items: center;
+    }
         .user-profile-btn {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
+            gap: 2px;
+            padding: 1px 1px;
             background: rgba(255, 255, 255, 0.2);
             border-radius: 25px;
             cursor: pointer;
@@ -119,16 +136,20 @@ function addUserProfileStyles() {
             justify-content: center;
             font-weight: bold;
             font-size: 1rem;
+            flex-shrink: 0;
         }
         
         .user-email {
-            color: white;
-            font-size: 0.9rem;
-            max-width: 150px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
+        color: white;
+        font-size: 0.9rem;
+        max-width: 150px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-style: normal !important;
+        transform: none !important;
+        -webkit-transform: none !important;
+    }
         
         .user-profile-btn:hover .user-email {
             color: #e47e08;
@@ -146,17 +167,18 @@ function addUserProfileStyles() {
         .user-dropdown-menu {
             display: none;
             position: absolute;
-            top: 100%;
+            top: 105%;
             right: 0;
             background: white;
             min-width: 200px;
             box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-            border-radius: 8px;
+            border-radius: 50px;
             overflow: hidden;
-            margin-top: 0.5rem;
+            margin-top: 0;
             list-style: none;
-            padding: 0;
+            padding-top: 0;
             z-index: 1000;
+            
         }
         
         .user-profile-dropdown:hover .user-dropdown-menu {
@@ -194,6 +216,7 @@ function addUserProfileStyles() {
                 left: 0;
             }
         }
+
     `;
     
     document.head.appendChild(style);
