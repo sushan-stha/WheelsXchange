@@ -64,19 +64,7 @@ const cars = [
                 seller: 'Resham Gurung',
                 location: 'Pokhara'
             },
-            {
-                id: 6,
-                make: 'Volkswagen',
-                model: 'Polo',
-                year: 2016,
-                price: 2100000,
-                type: 'Hatchback',
-                fuel: 'Petrol',
-                running: 55000,
-                image: 'https://www.kathmanduautomobiles.com.np/uploads/stocks/Kathmandu_Automobiles_2017_VW_Cross_Polo_1.6_1.jpg',
-                seller: 'Bipin Giri',
-                location: 'Kathmandu'
-            }
+            
         ];
 
         let filteredCars = [...cars];
@@ -295,3 +283,148 @@ const cars = [
 
             displayCars(cars);
         });
+    // Payment Modal and Processing
+    function handlePayment(carId) {
+    const car = cars.find(c => c.id === carId);
+    if (!car) return;
+    
+    createPaymentModal(car);
+    document.getElementById('paymentModal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+function createPaymentModal(car) {
+    const existingModal = document.getElementById('paymentModal');
+    if (existingModal) {
+        existingModal.remove();
+    }
+
+    const paymentModal = document.createElement('div');
+    paymentModal.id = 'paymentModal';
+    paymentModal.innerHTML = `
+        <div class="payment-overlay" onclick="closePayment()"></div>
+        <div class="payment-container">
+            <div class="payment-header">
+                <h3>Payment for ${car.make} ${car.model}</h3>
+                <button class="payment-close" onclick="closePayment()">&times;</button>
+            </div>
+            <div class="payment-content">
+                <div class="payment-car-info">
+                    <p><strong>Vehicle:</strong> ${car.make} ${car.model} (${car.year})</p>
+                    <p><strong>Seller:</strong> ${car.seller}</p>
+                    <p><strong>Price:</strong> Rs.${car.price.toLocaleString()}</p>
+                </div>
+                
+                <form class="payment-form" onsubmit="processPayment(event, ${car.id})">
+                    <div class="form-group">
+                        <label for="bankSelect">Select Bank</label>
+                        <select id="bankSelect" required>
+                            <option value="">Choose your bank</option>
+                            <option value="Nepal Bank Limited">Nepal Bank Limited</option>
+                            <option value="Rastriya Banijya Bank">Rastriya Banijya Bank</option>
+                            <option value="Nabil Bank">Nabil Bank</option>
+                            <option value="Nepal Investment Bank">Nepal Investment Bank</option>
+                            <option value="Standard Chartered Bank">Standard Chartered Bank</option>
+                            <option value="Himalayan Bank">Himalayan Bank</option>
+                            <option value="Nepal SBI Bank">Nepal SBI Bank</option>
+                            <option value="Nepal Bangladesh Bank">Nepal Bangladesh Bank</option>
+                            <option value="Everest Bank">Everest Bank</option>
+                            <option value="Kumari Bank">Kumari Bank</option>
+                            <option value="Laxmi Bank">Laxmi Bank</option>
+                            <option value="Citizens Bank International">Citizens Bank International</option>
+                            <option value="Prime Commercial Bank">Prime Commercial Bank</option>
+                            <option value="Sunrise Bank">Sunrise Bank</option>
+                            <option value="Century Commercial Bank">Century Commercial Bank</option>
+                            <option value="Sanima Bank">Sanima Bank</option>
+                            <option value="Machhapuchchhre Bank">Machhapuchchhre Bank</option>
+                            <option value="NIC Asia Bank">NIC Asia Bank</option>
+                            <option value="Global IME Bank">Global IME Bank</option>
+                            <option value="NMB Bank">NMB Bank</option>
+                            <option value="Prabhu Bank">Prabhu Bank</option>
+                            <option value="Mega Bank">Mega Bank</option>
+                            <option value="Civil Bank">Civil Bank</option>
+                            <option value="Agricultural Development Bank">Agricultural Development Bank</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="accountNumber">Account Number</label>
+                        <input type="text" id="accountNumber" placeholder="Enter your account number" required maxlength="20" required minlength="16">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="branchName">Branch Name</label>
+                        <input type="text" id="branchName" placeholder="Enter branch name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="paymentAmount">Payment Amount (Rs.)</label>
+                        <input type="number" id="paymentAmount" placeholder="Enter amount" required min="1000" max="${car.price}" value="${car.price}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="paymentMessage">Message (Optional)</label>
+                        <textarea id="paymentMessage" placeholder="Add a message to seller..." rows="3" maxlength="200"></textarea>
+                    </div>
+
+                    <div class="payment-buttons">
+                        <button type="button" class="cancel-btn" onclick="closePayment()">Cancel</button>
+                        <button type="submit" class="confirm-payment-btn">Confirm Payment</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(paymentModal);
+}
+
+function processPayment(event, carId) {
+    event.preventDefault();
+    
+    const bankName = document.getElementById('bankSelect').value;
+    const accountNum = document.getElementById('accountNumber').value;
+    const branchName = document.getElementById('branchName').value;
+    const amount = document.getElementById('paymentAmount').value;
+    const message = document.getElementById('paymentMessage').value;
+    
+    if (!bankName || !accountNum || !branchName || !amount) {
+        alert('Please fill in all required fields');
+        return;
+    }
+
+    // Show processing state
+    const submitBtn = document.querySelector('.confirm-payment-btn');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Processing...';
+    submitBtn.disabled = true;
+
+    // Simulate payment processing
+    setTimeout(() => {
+        alert(`Payment initiated successfully!\n\nBank: ${bankName}\nAccount: ${accountNum}\nBranch: ${branchName}\nAmount: Rs.${parseInt(amount).toLocaleString()}\n\nYou will receive a confirmation shortly.`);
+        
+        // Reset and close
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+        closePayment();
+    }, 2000);
+}
+
+function closePayment() {
+    const paymentModal = document.getElementById('paymentModal');
+    if (paymentModal) {
+        paymentModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+        setTimeout(() => {
+            paymentModal.remove();
+        }, 300);
+    }
+}
+
+// Add to existing keydown event listener
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closeChat();
+        closePayment();
+    }
+});
