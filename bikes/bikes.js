@@ -96,6 +96,27 @@ const bikes = [
                 location: 'Kathmandu'
             }
         ];
+        // Check if user is authenticated
+async function isUserAuthenticated() {
+    try {
+        const { data: { session }, error } = await supabase.auth.getSession();
+        return session && session.user;
+    } catch (error) {
+        console.error('Auth check error:', error);
+        return false;
+    }
+}
+
+// Show authentication required alert
+function showAuthAlert() {
+    showAlert('Please login to access this feature', 'error');
+    
+    // Redirect to login after 2 seconds
+    setTimeout(() => {
+        window.location.href = '../login-form/login.html';
+    }, 2000);
+}
+// Bike Display and Filtering
 
         let filteredBikes = [...bikes];
         let currentChatBike = null;
@@ -139,7 +160,13 @@ const bikes = [
             `).join('');
         }
 
-        function openChat(bikeId) {
+        async function openChat(bikeId) {
+            // Check authentication first
+            const isAuthenticated = await isUserAuthenticated();
+            if (!isAuthenticated) {
+                showAuthAlert();
+                return;
+            }
             currentChatBike = bikes.find(bike => bike.id === bikeId);
             if (!currentChatBike) return;
 
@@ -311,9 +338,15 @@ const bikes = [
             displayBikes(bikes);
         });
         // Payment Modal and Processing
-        function handlePayment(bikeId) {
-    const bike = bikes.find(b => b.id === bikeId);
-    if (!bike) return;
+        async function handlePayment(bikeId) {
+        // Check authentication first
+        const isAuthenticated = await isUserAuthenticated();
+        if (!isAuthenticated) {
+        showAuthAlert();
+        return;
+         }
+        const bike = bikes.find(b => b.id === bikeId);
+        if (!bike) return;
     
     createPaymentModal(bike);
     document.getElementById('paymentModal').style.display = 'flex';

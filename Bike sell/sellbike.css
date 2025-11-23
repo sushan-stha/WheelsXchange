@@ -7,7 +7,7 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    background: #fb7e2a;
+    background: linear-gradient(135deg, rgba(243, 110, 62, 0.95), rgba(235, 136, 23, 0.95));
     min-height: 100vh;
     padding: 20px;
 }

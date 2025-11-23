@@ -735,6 +735,11 @@ body {
     background: #ccc;
     cursor: not-allowed;
 }
+/* Auth alert button hover effects */
+.auth-alert-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
 
 @media (max-width: 480px) {
     .payment-container {

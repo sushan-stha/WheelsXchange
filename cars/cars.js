@@ -66,6 +66,25 @@ const cars = [
             },
             
         ];
+        // Check if user is authenticated
+        async function isUserAuthenticated() {
+            try {
+                const { data: { session }, error } = await supabase.auth.getSession();
+                return session && session.user;
+            } catch (error) {
+                console.error('Auth check error:', error);
+                return false;
+            }
+        }
+        // Show authentication required alert
+        function showAuthAlert() {
+            showAlert('Please login to access this feature', 'error');
+            
+            // Redirect to login after 2 seconds
+            setTimeout(() => {
+                window.location.href = '../login-form/login.html';
+            }, 2000);
+}
 
         let filteredCars = [...cars];
         let currentChatCar = null;
@@ -106,7 +125,13 @@ const cars = [
             `).join('');
         }
 
-        function openChat(carId) {
+                async function openChat(carId) {
+            // Check authentication first
+            const isAuthenticated = await isUserAuthenticated();
+            if (!isAuthenticated) {
+                showAuthAlert();
+                return;
+            }
             currentChatCar = cars.find(car => car.id === carId);
             if (!currentChatCar) return;
 
@@ -284,7 +309,13 @@ const cars = [
             displayCars(cars);
         });
     // Payment Modal and Processing
-    function handlePayment(carId) {
+    async function handlePayment(carId) {
+    // Check authentication first
+    const isAuthenticated = await isUserAuthenticated();
+    if (!isAuthenticated) {
+        showAuthAlert();
+        return;
+    }
     const car = cars.find(c => c.id === carId);
     if (!car) return;
     
