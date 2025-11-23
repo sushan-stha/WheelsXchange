@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sell Your Bike - whellesxchange</title>
+    <link rel="stylesheet" href="..//css/sellcars.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 style="color: #000;">List your vehicle</h1>
+            <p>List your vehicle and get the best offers from verified buyers</p>
+        </div>
+
+        <div class="success-message" id="successMessage">
+            Your car listing has been submitted successfully!
+        </div>
+
+        <form id="sellCarForm">
+            <!-- Vehicle Information -->
+            <div class="form-section">
+                <h2 class="section-title" style="color: #000;">Vehicle Information</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="make">Make *</label>
+                        <select id="make" name="make" required>
+                            <option value="">Select Make</option>
+                            <option value="tvs">TVS</option>
+                            <option value="honda">Honda</option>
+                            <option value="hero">Hero</option>
+                            <option value="rotalenfield">Royal Enfield</option>
+                            <option value="bajaj">Bajaj</option>
+                            <option value="yamaha">Yamaha</option>
+                            <option value="ktm">KTM</option>
+                            <option value="jawa">Jawa</option>
+                            <option value="triumph">Triumph</option>
+                            <option value="cfmoto">CF Moto</option>
+                            <option value="crossx">Cross X</option>
+                            <option value="aprilla">Aprilla</option>
+                            <option value="beneli">Beneli</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <div class="error-message">Please select a make</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="model">Model *</label>
+                        <input type="text" id="model" name="model" placeholder="e.g.Royal Enfield Hunter 350" required>
+                        <div class="error-message">Please enter the model</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="year">Year *</label>
+                        <select id="year" name="year" required>
+                            <option value="">Select Year</option>
+                        </select>
+                        <div class="error-message">Please select a year</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mileage">Mileage *</label>
+                        <input type="number" id="mileage" name="mileage" placeholder="50000" required>
+                        <div class="error-message">Please enter valid mileage</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="condition">Condition *</label>
+                        <select id="condition" name="condition" required>
+                            <option value="">Select Condition</option>
+                            <option value="Excellent">Excellent</option>
+                            <option value="Very Good">Very Good</option>
+                            <option value="Good">Good</option>
+                            <option value="Fair">Fair</option>
+                            <option value="Poor">Poor</option>
+                        </select>
+                        <div class="error-message">Please select condition</div>
+                    </div>
+
+                    <!-- <div class="form-group">
+                        <label for="transmission">Transmission *</label>
+                        <select id="transmission" name="transmission" required>
+                            <option value="">Select Transmission</option>
+                            <option value="Automatic">Automatic</option>
+                            <option value="Manual">Manual</option>
+                            <option value="CVT">CVT</option>
+                        </select>
+                        <div class="error-message">Please select transmission</div>
+                    </div> -->
+
+                    <div class="form-group">
+                        <label for="fuelType">Fuel Type *</label>
+                        <select id="fuelType" name="fuelType" required>
+                            <option value="">Select Fuel Type</option>
+                            <option value="Gasoline">Gasoline</option>
+                            <option value="Hybrid">Hybrid</option>
+                            <option value="Electric">Electric</option>
+                        </select>
+                        <div class="error-message">Please select fuel type</div>
+                    </div>
+
+                    <!-- <div class="form-group">
+                        <label for="bodyType">Body Type *</label>
+                        <select id="bodyType" name="bodyType" required>
+                            <option value="">Select Body Type</option>
+                            <option value="Sedan">Sedan</option>
+                            <option value="SUV">SUV</option>
+                            <option value="Hatchback">Hatchback</option>
+                            <option value="Coupe">Coupe</option>
+                            <option value="Convertible">Convertible</option>
+                            <option value="Truck">Truck</option>
+                            <option value="Van">Van</option>
+                        </select>
+                        <div class="error-message">Please select body type</div>
+                    </div> -->
+
+                    <div class="form-group">
+                        <label for="color">Color *</label>
+                        <input type="text" id="color" name="color" placeholder="White, Black, Red" required>
+                        <div class="error-message">Please enter the color</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="vin">VIN (Optional)</label>
+                        <input type="text" id="vin" name="vin" placeholder="17-digit VIN number">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features -->
+            <!-- <div class="form-section">
+                <h2 class="section-title"> Features & Options</h2>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="ac" name="features" value="Air Conditioning">
+                        <label for="ac">Air Conditioning</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="powerSteering" name="features" value="Power Steering">
+                        <label for="powerSteering">Power Steering</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="powerWindows" name="features" value="Power Windows">
+                        <label for="powerWindows">Power Windows</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="bluetooth" name="features" value="Bluetooth">
+                        <label for="bluetooth">Bluetooth</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="navigation" name="features" value="Navigation System">
+                        <label for="navigation">Navigation System</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="sunroof" name="features" value="Sunroof">
+                        <label for="sunroof">Sunroof</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="leatherSeats" name="features" value="Leather Seats">
+                        <label for="leatherSeats">Leather Seats</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="backup" name="features" value="Backup Camera">
+                        <label for="backup">Backup Camera</label>
+                    </div>
+                </div>
+            </div> -->
+
+            <!-- Pricing -->
+            <div class="form-section">
+                <h2 class="section-title" style="color: #000;">Pricing</h2>
+                <div class="form-grid">
+                    <div class="form-group price-input">
+                        <label for="price">Asking Price *</label>
+                        <input type="number" id="price" name="price" placeholder="25000" required>
+                        <div class="error-message">Please enter a valid price</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="negotiable">Price Negotiable?</label>
+                        <select id="negotiable" name="negotiable">
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Description -->
+            <div class="form-section">
+                <h2 class="section-title" style="color: #000;"> Description</h2>
+                <div class="form-group full-width">
+                    <label for="description">Vehicle Description *</label>
+                    <textarea id="description" name="description" placeholder="Describe your vehicle's condition, maintenance history, and any additional details..." required></textarea>
+                    <div class="error-message">Please provide a description</div>
+                </div>
+            </div>
+
+            <!-- Images -->
+            <div class="form-section">
+                <h2 class="section-title" style="color: #000;"> Photos</h2>
+                <div class="form-group full-width">
+                    <div class="image-upload" id="imageUpload">
+                        <h3>Upload Photos</h3>
+                        <p>Drag & drop images here or click to select</p>
+                        <p style="font-size: 0.9em; color: #777; margin-top: 10px;">Maximum 10 images, JPG/PNG only</p>
+                        <input type="file" id="images" name="images" multiple accept="image/*" style="display: none;">
+                    </div>
+                    <div class="preview-images" id="previewImages"></div>
+                </div>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="form-section">
+                <h2 class="section-title" style="color: #000;"> Contact Information</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="sellerName">Full Name *</label>
+                        <input type="text" id="sellerName" name="sellerName" placeholder="John Doe" required>
+                        <div class="error-message">Please enter your name</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                        <div class="error-message">Please enter a valid email</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" placeholder="9863736737" required>
+                        <div class="error-message">Please enter a valid phone number</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location">Location *</label>
+                        <input type="text" id="location" name="location" placeholder="District,City" required>
+                        <div class="error-message">Please enter your location</div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn"> List My Vehicle</button>
+        </form>
+    </div>
+
+    <script src="..//javascript/sellcars.js"></script>
+</body>
+</html>
