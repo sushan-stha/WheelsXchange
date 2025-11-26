@@ -66,6 +66,17 @@
             padding: 1rem 2rem;
             z-index: 1000;
         }
+        /* navbar logo */
+        .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 2px;  
+        }
+        .nav img {
+        width: 50px; 
+        height: auto;
+        margin-right: 5px;
+    }
 
         .logo {
             font-size: 1.5rem;
@@ -532,6 +543,14 @@
             .menu-toggle {
                 display: flex;
                 
+            }
+            .menu.active .dropdown-menu {
+            position: static;
+            display: none;
+            }
+
+        .menu.active .dropdown:hover .dropdown-menu {
+            display: block;
             }
             
             .head {

@@ -9,24 +9,35 @@
 </head>
 <body>
     <header class="header">
-        <div class="container">
-            <nav class="nav">
-                <div class="logo">WheelsXChange</div>
-                <ul class="menu">
-                    <li><a href="../index.html">Home</a></li>
-                    <li class="dropdown"><a href="#buy">Buy</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="./cars.html" onclick="showSection('cars')">Cars</a></li>
-                            <li><a href="../bikes/bikes.html" onclick="showSection('bikes')">Bikes</a></li>
-                        </ul>
-                    <li><a href="#sell" onclick="openListingModal('car')">Sell</a></li>
-                    <!-- <li><a href="#pricing">Pricing</a></li> -->
-                    <li><a href="#contact">Contact</a></li>
-                    <li class="login-item"><a href="../login-form/login.html" class="login-btn" onclick="showLoginModal()">Login</a></li>
+    <nav class="nav">
+      <div class="logo-container">
+        <img src="../assets/logo.png">
+        <div class="logo">Wheels<span>X</span>Change</div>
+      </div>
+        <ul class="menu">
+            <li><a href="../index.html">Home</a></li>
+            <li class="dropdown"><a href="#buy">Buy</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../cars/cars.html" target="_blank">Cars</a></li>
+                    <li><a href="../bikes/bikes.html" target="_blank">Bikes</a></li>
                 </ul>
-            </nav>
-            </div>
-            </header>
+            </li>
+            <li class="dropdown"><a href="#sell">Sell</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../Car sell/sellcars.html" target="_blank">Sell Car</a></li>
+                    <li><a href="../Bike sell/sellbikes.html" target="_blank">Sell Bike</a></li>
+                </ul>
+            </li>
+            <li><a href="../contact/contatcus.html">Contact</a></li>
+            <li class="login-item"><a href="../login-form/login.html" class="login-btn">Login</a></li>
+        </ul>
+        <div class="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+</header>
          <h1 class="page-title">Find Your Perfect Drive<i class="fa fa-car" aria-hidden="true"></i></h1>
          <div class="container1">
         <div class="cars-section">
