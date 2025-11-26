@@ -23,7 +23,7 @@
                 <h2 class="section-title" style="color: #000;">Vehicle Information</h2>
                 <div class="form-grid">
                     <div class="form-group">
-                        <label for="make">Make *</label>
+                        <label for="make">Brand *</label>
                         <select id="make" name="make" required>
                             <option value="">Select Make</option>
                             <option value="tvs">TVS</option>
@@ -52,29 +52,14 @@
 
                     <div class="form-group">
                         <label for="year">Year *</label>
-                        <select id="year" name="year" required>
-                            <option value="">Select Year</option>
-                        </select>
+                        <input type="text" id="year" name="Year" placeholder="e.g. 2020" required>
                         <div class="error-message">Please select a year</div>
                     </div>
 
                     <div class="form-group">
-                        <label for="mileage">Mileage *</label>
+                        <label for="mileage">Running *</label>
                         <input type="number" id="mileage" name="mileage" placeholder="50000" required>
                         <div class="error-message">Please enter valid mileage</div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="condition">Condition *</label>
-                        <select id="condition" name="condition" required>
-                            <option value="">Select Condition</option>
-                            <option value="Excellent">Excellent</option>
-                            <option value="Very Good">Very Good</option>
-                            <option value="Good">Good</option>
-                            <option value="Fair">Fair</option>
-                            <option value="Poor">Poor</option>
-                        </select>
-                        <div class="error-message">Please select condition</div>
                     </div>
 
                     <!-- <div class="form-group">
@@ -87,18 +72,6 @@
                         </select>
                         <div class="error-message">Please select transmission</div>
                     </div> -->
-
-                    <div class="form-group">
-                        <label for="fuelType">Fuel Type *</label>
-                        <select id="fuelType" name="fuelType" required>
-                            <option value="">Select Fuel Type</option>
-                            <option value="Gasoline">Gasoline</option>
-                            <option value="Hybrid">Hybrid</option>
-                            <option value="Electric">Electric</option>
-                        </select>
-                        <div class="error-message">Please select fuel type</div>
-                    </div>
-
                     <!-- <div class="form-group">
                         <label for="bodyType">Body Type *</label>
                         <select id="bodyType" name="bodyType" required>
@@ -113,58 +86,8 @@
                         </select>
                         <div class="error-message">Please select body type</div>
                     </div> -->
-
-                    <div class="form-group">
-                        <label for="color">Color *</label>
-                        <input type="text" id="color" name="color" placeholder="White, Black, Red" required>
-                        <div class="error-message">Please enter the color</div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="vin">VIN (Optional)</label>
-                        <input type="text" id="vin" name="vin" placeholder="17-digit VIN number">
-                    </div>
                 </div>
             </div>
-
-            <!-- Features -->
-            <!-- <div class="form-section">
-                <h2 class="section-title"> Features & Options</h2>
-                <div class="checkbox-group">
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="ac" name="features" value="Air Conditioning">
-                        <label for="ac">Air Conditioning</label>
-                    </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="powerSteering" name="features" value="Power Steering">
-                        <label for="powerSteering">Power Steering</label>
-                    </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="powerWindows" name="features" value="Power Windows">
-                        <label for="powerWindows">Power Windows</label>
-                    </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="bluetooth" name="features" value="Bluetooth">
-                        <label for="bluetooth">Bluetooth</label>
-                    </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="navigation" name="features" value="Navigation System">
-                        <label for="navigation">Navigation System</label>
-                    </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="sunroof" name="features" value="Sunroof">
-                        <label for="sunroof">Sunroof</label>
-                    </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="leatherSeats" name="features" value="Leather Seats">
-                        <label for="leatherSeats">Leather Seats</label>
-                    </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="backup" name="features" value="Backup Camera">
-                        <label for="backup">Backup Camera</label>
-                    </div>
-                </div>
-            </div> -->
 
             <!-- Pricing -->
             <div class="form-section">
@@ -185,15 +108,7 @@
                 </div>
             </div>
 
-            <!-- Description -->
-            <div class="form-section">
-                <h2 class="section-title" style="color: #000;"> Description</h2>
-                <div class="form-group full-width">
-                    <label for="description">Vehicle Description *</label>
-                    <textarea id="description" name="description" placeholder="Describe your vehicle's condition, maintenance history, and any additional details..." required></textarea>
-                    <div class="error-message">Please provide a description</div>
-                </div>
-            </div>
+            
 
             <!-- Images -->
             <div class="form-section">

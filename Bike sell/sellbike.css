@@ -158,19 +158,20 @@ textarea {
 .submit-btn {
     width: 100%;
     padding: 15px;
-    background:#000;
+    background:linear-gradient(135deg, #ff6b35, #f7931e);
     color: white;
     border: none;
     border-radius: 8px;
     font-size: 1.2em;
     font-weight: bold;
     cursor: pointer;
-    transition: all 0.3s;
+    /* transition: all 0.3s; */
 }
 
 .submit-btn:hover {
-    transform: translateY(-2px);
+    /* transform: translateY(-2px); */
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    background: #7f8c8d;
 }
 
 /* Image preview */
