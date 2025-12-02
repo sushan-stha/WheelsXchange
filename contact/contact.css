@@ -26,7 +26,7 @@
     justify-content: space-between;
     width: 100%;
     background: linear-gradient(135deg, #ff6b35, #f7931e);
-    padding: 0.2rem 2rem;  /* Changed from 1rem to 0.5rem */
+    padding: 0.2rem 2rem; 
     z-index: 1000;
 }
 
@@ -37,6 +37,7 @@
     margin-right: 20px;
     font-weight: bold;
     color: white;
+    cursor: pointer;
 }
 
 .logo span {
@@ -51,6 +52,7 @@
     display: flex;
     align-items: center;
     gap: 2px;  
+    cursor: pointer;
 }
 
 .menu {
@@ -290,7 +292,7 @@ a.login-btn:hover {
         position: absolute;
         top: 100%;
         right: 0;
-        width: 35%;  /* Made narrower like your bike section */
+        width: 50%;  
         backdrop-filter: blur(90px);
         -webkit-backdrop-filter: blur(90px);
         background: linear-gradient(135deg, rgba(255,107,53,0.95), rgba(224, 124, 9, 0.95));
@@ -366,6 +368,13 @@ a.login-btn:hover {
 
     .contact-section {
         gap: 30px;
+    }
+    
+}
+@media (min-width: 768px) and (max-width: 860px) {
+    .contact-form {
+        order: 1;
+        min-width: 100%;
     }
 }
 
@@ -454,14 +463,17 @@ a.login-btn:hover {
 
     .contact-form {
         order: 1;  /* Form appears first */
+        min-width: 100%;
     }
 
     .contact-info {
         order: 2;  /* Info appears second */
-        display: grid;
+        /* display: grid; */
         grid-template-columns: 1fr auto;
         gap: 15px;
         align-items: start;
+        min-width: 100%;
+        display: block;
     }
 
     .contact-info h2 {
@@ -503,6 +515,11 @@ a.login-btn:hover {
     .contact-form {
         padding: 15px;
         height: auto;
+        width: 100%;
+    }
+    .header {
+        height: auto;
+        width: 100%;
     }
 
     .biglogo img {
