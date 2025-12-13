@@ -185,56 +185,78 @@ function validateForm() {
 }
 
 // Submit form
-function submitForm() {
+function submitForm() {// Submit form - REPLACE THE EXISTING submitForm() FUNCTION WITH THIS
+async function submitForm() {
     const form = document.getElementById('sellCarForm');
     const formData = new FormData(form);
     
-    // Get selected features
-    const features = [];
-    document.querySelectorAll('input[name="features"]:checked').forEach(checkbox => {
-        features.push(checkbox.value);
-    });
+    // Check if user is authenticated
+    const { data: { session }, error: authError } = await supabase.auth.getSession();
     
-    // Create listing object
-    const listing = {
-        vehicle: {
+    if (!session) {
+        alert('Please login to list your bike');
+        window.location.href = '../login-form/login.html';
+        return;
+    }
+    
+    // Show loading state
+    const submitBtn = document.querySelector('.submit-btn');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Submitting...';
+    submitBtn.disabled = true;
+
+    try {
+        // For now, use placeholder URLs for images
+        // You can implement actual image upload later
+        const imageUrls = uploadedFiles.map((file, index) => 
+            `placeholder-${Date.now()}-${index}.jpg`
+        );
+
+        // Create listing object
+        const listing = {
             make: formData.get('make'),
             model: formData.get('model'),
             year: formData.get('year'),
-            mileage: formData.get('mileage'),
-            condition: formData.get('condition'),
-            transmission: formData.get('transmission'),
-            fuelType: formData.get('fuelType'),
-            bodyType: formData.get('bodyType'),
-            color: formData.get('color'),
-            vin: formData.get('vin')
-        },
-        price: {
-            asking: formData.get('price'),
-            negotiable: formData.get('negotiable')
-        },
-        description: formData.get('description'),
-        features: features,
-        seller: {
-            name: formData.get('sellerName'),
-            email: formData.get('email'),
-            phone: formData.get('phone'),
-            location: formData.get('location')
-        },
-        images: uploadedFiles.length,
-        timestamp: new Date().toISOString()
-    };
+            mileage: parseInt(formData.get('mileage')),
+            type: 'Not Specified', // Add type field in form if needed
+            price: parseFloat(formData.get('price')),
+            negotiable: formData.get('negotiable'),
+            seller_name: formData.get('sellerName'),
+            seller_email: formData.get('email'),
+            seller_phone: formData.get('phone'),
+            location: formData.get('location'),
+            image_urls: imageUrls.length > 0 ? imageUrls : ['https://via.placeholder.com/400x250?text=No+Image']
+        };
 
-    // Show success message
-    showSuccessMessage();
-    
-    // Reset form
-    resetForm();
-    
-    // Log data 
-    console.log('Car listing submitted:', listing);
-    
-    
+        // Insert into Supabase
+        const { data, error } = await supabase
+            .from('bike_listings')
+            .insert([listing])
+            .select();
+
+        if (error) throw error;
+
+        // Show success message
+        showSuccessMessage();
+        
+        // Reset form
+        resetForm();
+        
+        console.log('Bike listing submitted:', data);
+        
+        // Redirect to bikes page after 2 seconds
+        setTimeout(() => {
+            window.location.href = '../bikes/bikes.html';
+        }, 2000);
+
+    } catch (error) {
+        console.error('Error submitting listing:', error);
+        alert('Error submitting listing: ' + error.message);
+    } finally {
+        // Restore button state
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+    }
 }
 
 // Show success message
@@ -285,4 +307,4 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
-
+}

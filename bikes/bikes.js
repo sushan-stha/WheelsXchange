@@ -1,101 +1,67 @@
-const bikes = [
-            {
-                id: 1,
-                make: 'Yamaha',
-                model: 'R15',
-                year: 2022,
-                price: 320000,
-                type: 'Sports',
-                running: 18000,
-                image: 'https://www.team-bhp.com/sites/default/files/pictures2024-01/R15_PostService.jpg',
-                seller: 'Sushan Shrestha',
-                location: 'Bhaktapur',
-            },
-            {
-                id: 2,
-                make: 'Suzuki',
-                model: 'V-Storm 250',
-                year: 2024,
-                price: 420000,
-                type: 'Touring',
-                running: 12000,
-                image: 'https://www.en.meroauto.com/wp-content/uploads/2025/05/suzuki-v-strom-250-sx-slant-rear.jpg',
-                seller: 'Ram Bahadur Shrestha',
-                location: 'Lalitpur'
-            },
-            {
-                id: 3,
-                make: 'Honda',
-                model: 'Shine',
-                year: 2018,
-                price: 175000,
-                type: 'Commuter',
-                running: 32000,
-                image: 'https://img.autocarindia.com/ExtraImages/20240517024452_Honda_SP125_BS6_front_static.jpg?w=700&c=1',
-                seller: 'Nishan Khatri',
-                location: 'Bhaktapur'
-            },
-            {
-                id: 4,
-                make: 'CF Moto',
-                model: 'MT450',
-                year: 2023,
-                price: 750000,
-                type: 'Touring',
-                running: 14000,
-                image: 'https://motar-company.com.np/blackhole/CFMOTO-450MT-4.webp',
-                seller: 'Mahesh Tharu',
-                location: 'Chitwan'
-            },
-            {
-                id: 5,
-                make: 'Pulsar',
-                model: 'NS200',
-                year: 2022,
-                price: 240000,
-                type: 'Naked Sport',
-                running: 26000,
-                image: 'https://i.redd.it/bajaj-pulsar-ns-200-2022-vs-2023-v0-a6hvanimyp5c1.jpg?width=1600&format=pjpg&auto=webp&s=0ee554e3d6726c777c0e0c9235a93173def60c5a',
-                seller: 'Resham Gurung',
-                location: 'Pokhara'
-            },
-            {
-                id: 6,
-                make: 'Royal Enfield',
-                model: 'Classic 350',
-                year: 2021,
-                price: 420000,
-                type: 'Retro',
-                running: 23000,
-                image: 'https://www.motoroids.com/wp-content/uploads/2021/09/2021-Royal-Enfield-Classic-350-8.jpg',
-                seller: 'Bipin Giri',
-                location: 'Kathmandu'
-            },
-            {
-                id: 7,
-                make: 'KTM',
-                model: 'Duke 390 Gen 3',
-                year: 2024,
-                price: 750000,
-                type: 'Naked Sport',
-                running: 5200,
-                image: 'https://cdn.bikedekho.com/upload/userfiles/images/683dc88809e3b.jpg?tr=w-420',
-                seller: 'Suraj Thapa',
-                location: 'Bhaktapur'
-            },
-            {
-                id: 8,
-                make: 'Yamaha',
-                model: 'MT-15',
-                year: 2023,
-                price: 390000,
-                type: 'Naked Sport',
-                running: 12000,
-                image: 'https://i.pinimg.com/736x/f0/bc/75/f0bc75e82bf8ed2dfe7922ddb7348ca8.jpg',
-                seller: 'Deepak Shrestha',
-                location: 'Kathmandu'
-            }
-        ];
+
+let bikes = [];
+
+// Fetch bikes from Supabase
+async function fetchBikes() {
+    try {
+        const { data, error } = await supabase
+            .from('bike_listings')
+            .select('*')
+            .order('created_at', { ascending: false });
+
+        if (error) throw error;
+
+        // Transform data to match expected format
+        bikes = data.map(bike => ({
+            id: bike.id,
+            make: bike.make,
+            model: bike.model,
+            year: parseInt(bike.year),
+            price: bike.price,
+            type: bike.type || 'Not Specified',
+            running: bike.mileage,
+            image: bike.image_urls && bike.image_urls.length > 0 
+                ? bike.image_urls[0] 
+                : 'https://via.placeholder.com/400x250?text=No+Image',
+            seller: bike.seller_name,
+            location: bike.location
+        }));
+
+        filteredBikes = [...bikes];
+        displayBikes(bikes);
+        
+    } catch (error) {
+        console.error('Error fetching bikes:', error);
+        // Show user-friendly message
+        const noResults = document.getElementById('noResults');
+        noResults.textContent = 'Error loading bikes. Please refresh the page.';
+        noResults.style.display = 'block';
+    }
+}
+
+// UPDATE THE DOMContentLoaded EVENT LISTENER
+// Find the existing one and replace it with this:
+document.addEventListener('DOMContentLoaded', function() {
+    // Fetch bikes from Supabase on page load
+    fetchBikes();
+    
+    // Add event listeners for all filter fields
+    document.getElementById('searchBar').addEventListener('input', applyFilters);
+    if (document.getElementById('brand')) document.getElementById('brand').addEventListener('change', applyFilters);
+    if (document.getElementById('type')) document.getElementById('type').addEventListener('change', applyFilters);
+    if (document.getElementById('year')) document.getElementById('year').addEventListener('change', applyFilters);
+    if (document.getElementById('minPrice')) document.getElementById('minPrice').addEventListener('input', applyFilters);
+    if (document.getElementById('maxPrice')) document.getElementById('maxPrice').addEventListener('input', applyFilters);
+    if (document.getElementById('running')) document.getElementById('running').addEventListener('input', applyFilters);
+
+    // Close chat/payment modals with Escape key
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            closeChat();
+            closePayment();
+        }
+    });
+});
         // Check if user is authenticated
 async function isUserAuthenticated() {
     try {

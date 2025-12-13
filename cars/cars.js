@@ -1,71 +1,68 @@
-const cars = [
-            {
-                id: 1,
-                make: 'Toyota',
-                model: 'Hilux',
-                year: 2020,
-                price: 8200000,
-                type: 'Pickup',
-                fuel: 'Diesel',
-                running: 85000,
-                image: 'https://media.istockphoto.com/id/595755830/photo/toyota-hilux-on-the-road.jpg?s=612x612&w=0&k=20&c=u3yRyyoc5PGUCF5o7f6KxViuXtDDwAuuol9eCI-QyGM=',
-                seller: 'Sushan Shrestha',
-                location: 'Bhaktapur',
-            },
-            {
-                id: 2,
-                make: 'Hyundai',
-                model: 'Creta',
-                year: 2019,
-                price: 3900000,
-                type: 'SUV',
-                fuel: 'Petrol',
-                running: 62000,
-                image: 'https://cdn.motor1.com/images/mgl/Kb8g0R/s1/hyundai-creta-2025---versao-ultimate-na-cor-cinza.jpg',
-                seller: 'Ram Bahadur Shrestha',
-                location: 'Lalitpur'
-            },
-            {
-                id: 3,
-                make: 'Honda',
-                model: 'Civic',
-                year: 2015,
-                price: 3100000,
-                type: 'Sedan',
-                fuel: 'Petrol',
-                running: 62000,
-                image: 'https://stimg.cardekho.com/images/carexteriorimages/930x620/Honda/City/12667/1750410975226/front-left-side-47.jpg',
-                seller: 'Nishan Khatri',
-                location: 'Bhaktapur'
-            },
-            {
-                id: 4,
-                make: 'Tata',
-                model: 'Nexon',
-                year: 2021,
-                price: 3000000,
-                type: 'SUV',
-                fuel: 'Electric',
-                running: 45000,
-                image: 'https://img.autocarpro.in/autocarpro/438b795a-316b-4dc2-8bc8-769d7bc67cfc_601c377bff864a0381afae1441cb641c.jpg?w=750&h=490&q=75&c=1',
-                seller: 'Mahesh Tharu',
-                location: 'Chitwan'
-            },
-            {
-                id: 5,
-                make: 'Ford',
-                model: 'Raptor',
-                year: 2022,
-                price: 12000000,
-                type: 'Pickup',
-                fuel: 'Petrol',
-                running: 96000,
-                image: 'https://nepaldrives.com/wp-content/uploads/2018/12/raptor-gallery-brand-gallery-ex-1-1-overlay-desktop-1250x630.jpg',
-                seller: 'Resham Gurung',
-                location: 'Pokhara'
-            },
-            
-        ];
+let cars = [];
+
+// Fetch cars from Supabase
+async function fetchCars() {
+    try {
+        const { data, error } = await supabase
+            .from('car_listings')
+            .select('*')
+            .order('created_at', { ascending: false });
+
+        if (error) throw error;
+
+        // Transform data to match expected format
+        cars = data.map(car => ({
+            id: car.id,
+            make: car.make,
+            model: car.model,
+            year: parseInt(car.year),
+            price: car.price,
+            type: car.body_type || 'Not Specified',
+            fuel: car.fuel_type || 'Not Specified',
+            running: car.mileage,
+            image: car.image_urls && car.image_urls.length > 0 
+                ? car.image_urls[0] 
+                : 'https://via.placeholder.com/400x200?text=No+Image',
+            seller: car.seller_name,
+            location: car.location
+        }));
+
+        filteredCars = [...cars];
+        displayCars(cars);
+        
+    } catch (error) {
+        console.error('Error fetching cars:', error);
+        // Show user-friendly message
+        const noResults = document.getElementById('noResults');
+        noResults.textContent = 'Error loading cars. Please refresh the page.';
+        noResults.style.display = 'block';
+    }
+}
+
+// UPDATE THE DOMContentLoaded EVENT LISTENER
+// Find the existing one and replace it with this:
+document.addEventListener('DOMContentLoaded', function() {
+    // Fetch cars from Supabase on page load
+    fetchCars();
+    
+    // Add event listeners for all filter fields
+    document.getElementById('searchBar').addEventListener('input', applyFilters);
+    if (document.getElementById('brand')) document.getElementById('brand').addEventListener('change', applyFilters);
+    if (document.getElementById('type')) document.getElementById('type').addEventListener('change', applyFilters);
+    if (document.getElementById('year')) document.getElementById('year').addEventListener('change', applyFilters);
+    if (document.getElementById('minPrice')) document.getElementById('minPrice').addEventListener('input', applyFilters);
+    if (document.getElementById('maxPrice')) document.getElementById('maxPrice').addEventListener('input', applyFilters);
+    if (document.getElementById('fuel')) document.getElementById('fuel').addEventListener('change', applyFilters);
+    if (document.getElementById('running')) document.getElementById('running').addEventListener('input', applyFilters);
+
+    // Close chat/payment modals with Escape key
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            closeChat();
+            closePayment();
+        }
+    });
+});
         // Check if user is authenticated
         async function isUserAuthenticated() {
             try {
