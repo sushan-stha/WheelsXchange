@@ -217,7 +217,7 @@ async function submitForm() {
             
             // Get public URL
             const { data: urlData } = supabase.storage
-                .from('vehicle-images')
+                .from('vehicle-image')
                 .getPublicUrl(filePath);
             
             imageUrls.push(urlData.publicUrl);

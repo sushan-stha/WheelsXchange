@@ -20,16 +20,20 @@ async function fetchBikes() {
             price: bike.price,
             type: bike.type || 'Not Specified',
             running: bike.mileage,
-            image: bike.image_urls && bike.image_urls.length > 0 
-                ? bike.image_urls[0] 
-                : 'https://via.placeholder.com/400x250?text=No+Image',
+            
+            image: Array.isArray(bike.image_urls) && bike.image_urls.length > 0
+            ? bike.image_urls[0]
+            : 'https://via.placeholder.com/400x250?text=No+Image',
             seller: bike.seller_name,
             location: bike.location
         }));
 
+        console.log('✅ Loaded', bikes.length, 'bikes');
+        console.log('🖼️ Image URLs:', bikes.map(b => b.image));
+        console.log('📦 Raw image_urls from DB:', data.map(d => d.image_urls));
         filteredBikes = [...bikes];
         displayBikes(bikes);
-        
+            
     } catch (error) {
         console.error('Error fetching bikes:', error);
         // Show user-friendly message
@@ -102,7 +106,7 @@ function showAuthAlert() {
             
             bikesGrid.innerHTML = bikesToShow.map(bike => `
                 <div class="bike-card">
-                    <img src="${bike.image}" alt="${bike.make} ${bike.model}" class="bike-image">
+                    <img src="${bike.image}" alt="${bike.make} ${bike.model}" class="bike-image" onerror="this.src='https://via.placeholder.com/400x250?text=No+Image';">
                     <div class="bike-info">
                         <h3 class="bike-title">${bike.make} ${bike.model}</h3>
                         <div class="bike-details">
@@ -283,26 +287,7 @@ function showAuthAlert() {
             displayBikes(filteredBikes);
         }
 
-        // Event listeners
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add event listeners for all filter fields
-            document.getElementById('searchBar').addEventListener('input', applyFilters);
-            if (document.getElementById('brand')) document.getElementById('brand').addEventListener('change', applyFilters);
-            if (document.getElementById('type')) document.getElementById('type').addEventListener('change', applyFilters);
-            if (document.getElementById('year')) document.getElementById('year').addEventListener('change', applyFilters);
-            if (document.getElementById('minPrice')) document.getElementById('minPrice').addEventListener('input', applyFilters);
-            if (document.getElementById('maxPrice')) document.getElementById('maxPrice').addEventListener('input', applyFilters);
-            if (document.getElementById('running')) document.getElementById('running').addEventListener('input', applyFilters);
-
-            // Close chat modal with Escape key
-            document.addEventListener('keydown', function(event) {
-                if (event.key === 'Escape') {
-                    closeChat();
-                }
-            });
-
-            displayBikes(bikes);
-        });
+            
         // Payment Modal and Processing
         async function handlePayment(bikeId) {
         // Check authentication first

@@ -21,12 +21,14 @@ async function fetchCars() {
             fuel: car.fuel_type || 'Not Specified',
             running: car.mileage,
             image: car.image_urls && car.image_urls.length > 0 
-                ? car.image_urls[0] 
-                : 'https://via.placeholder.com/400x200?text=No+Image',
+            ? (typeof car.image_urls === 'string' ? car.image_urls : car.image_urls[0])
+            : 'https://via.placeholder.com/400x200?text=No+Image',
             seller: car.seller_name,
             location: car.location
         }));
 
+        console.log('✅ Loaded', cars.length, 'cars');
+        console.log('📸 Image URLs:', cars.map(c => c.image));
         filteredCars = [...cars];
         displayCars(cars);
         
@@ -101,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             carsGrid.innerHTML = carsToShow.map(car => `
                 <div class="car-card">
-                    <img src="${car.image}" alt="${car.make} ${car.model}" class="car-image">
+                    <img src="${car.image}" alt="${car.make} ${car.model}" class="car-image" onerror="this.src='https://via.placeholder.com/400x200?text=No+Image'; console.error('Failed to load image:', '${car.image}');">
                     <div class="car-info">
                         <h3 class="car-title">${car.make} ${car.model}</h3>
                         <div class="car-details">
@@ -282,29 +284,7 @@ document.addEventListener('DOMContentLoaded', function() {
             filteredCars = [...cars];
             displayCars(filteredCars);
         }
-
-        // Event listeners
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add event listeners for all filter fields
-            document.getElementById('searchBar').addEventListener('input', applyFilters);
-            if (document.getElementById('brand')) document.getElementById('brand').addEventListener('change', applyFilters);
-            if (document.getElementById('type')) document.getElementById('type').addEventListener('change', applyFilters);
-            if (document.getElementById('year')) document.getElementById('year').addEventListener('change', applyFilters);
-            if (document.getElementById('minPrice')) document.getElementById('minPrice').addEventListener('input', applyFilters);
-            if (document.getElementById('maxPrice')) document.getElementById('maxPrice').addEventListener('input', applyFilters);
-            if (document.getElementById('fuel')) document.getElementById('fuel').addEventListener('change', applyFilters);
-            if (document.getElementById('running')) document.getElementById('running').addEventListener('input', applyFilters);
-
         
-            // Close chat modal with Escape key
-            document.addEventListener('keydown', function(event) {
-                if (event.key === 'Escape') {
-                    closeChat();
-                }
-            });
-
-            displayCars(cars);
-        });
     // Payment Modal and Processing
     async function handlePayment(carId) {
     // Check authentication first
