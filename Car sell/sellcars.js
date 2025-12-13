@@ -205,10 +205,37 @@ async function submitForm() {
     submitBtn.disabled = true;
 
     try {
-        // For now, use placeholder URLs for images
-        const imageUrls = uploadedFiles.map((file, index) => 
-            `placeholder-${Date.now()}-${index}.jpg`
-        );
+    // Upload images to Supabase Storage
+    const imageUrls = [];
+    
+    if (uploadedFiles.length > 0) {
+        submitBtn.textContent = 'Uploading images...';
+        
+        for (let i = 0; i < uploadedFiles.length; i++) {
+            const file = uploadedFiles[i];
+            const fileExt = file.name.split('.').pop();
+            const fileName = `car_${Date.now()}_${i}.${fileExt}`;
+            const filePath = `cars/${fileName}`;
+            
+            // Upload file to Supabase Storage
+            const { data: uploadData, error: uploadError } = await supabase.storage
+                .from('vehicle-images')
+                .upload(filePath, file);
+            
+            if (uploadError) throw uploadError;
+            
+            // Get public URL
+            const { data: urlData } = supabase.storage
+                .from('vehicle-images')
+                .getPublicUrl(filePath);
+            
+            imageUrls.push(urlData.publicUrl);
+        }
+    } else {
+        imageUrls.push('https://via.placeholder.com/400x200?text=No+Image');
+    }
+    
+    submitBtn.textContent = 'Submitting listing...';
 
         // Create listing object
         const listing = {
