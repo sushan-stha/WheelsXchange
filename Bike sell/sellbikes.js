@@ -185,7 +185,6 @@ function validateForm() {
 }
 
 // Submit form
-function submitForm() {// Submit form - REPLACE THE EXISTING submitForm() FUNCTION WITH THIS
 async function submitForm() {
     const form = document.getElementById('sellCarForm');
     const formData = new FormData(form);
@@ -259,6 +258,7 @@ async function submitForm() {
     }
 }
 
+
 // Show success message
 function showSuccessMessage() {
     const successMessage = document.getElementById('successMessage');
@@ -307,4 +307,4 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
-}
+
