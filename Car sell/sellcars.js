@@ -3,23 +3,9 @@ let uploadedFiles = [];
 
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', function() {
-    populateYears();
     setupImageUpload();
     setupFormValidation();
 });
-
-// Populate year dropdown
-function populateYears() {
-    const yearSelect = document.getElementById('year');
-    const currentYear = new Date().getFullYear();
-    
-    for (let year = currentYear; year >= 1990; year--) {
-        const option = document.createElement('option');
-        option.value = year;
-        option.textContent = year;
-        yearSelect.appendChild(option);
-    }
-}
 
 // Image upload functionality
 function setupImageUpload() {
