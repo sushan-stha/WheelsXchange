@@ -210,7 +210,7 @@ async function submitForm() {
             
             // Upload file to Supabase Storage
             const { data: uploadData, error: uploadError } = await supabase.storage
-                .from('vehicle-images')
+                .from('vehicle-image')
                 .upload(filePath, file);
             
             if (uploadError) throw uploadError;
