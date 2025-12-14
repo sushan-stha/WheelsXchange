@@ -7,7 +7,7 @@
 
     body {
       font-family: Arial, sans-serif;
-      background-color: rgb(232, 231, 228); 
+      background: linear-gradient(135deg, #fff5e6 0%, #ffe6cc 100%);
     }
 
     /* Header & Navigation */
@@ -176,7 +176,7 @@ a.login-btn:hover {
       flex: 1;
       min-width: 500px;
       height: auto;
-        background: #fff5e6; 
+        background: #ffffff; 
         border-radius: 10px;
         box-shadow: 0 2px 16px #a5a4a4;
         padding: 20px;
