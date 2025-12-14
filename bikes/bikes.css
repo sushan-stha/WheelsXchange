@@ -72,6 +72,13 @@ body {
             float: left;
             z-index: 1;
         }
+        .logo span {
+            color: #000;
+            transform: rotate(5deg);
+            display: inline-block;
+            position: relative;
+            font-size: 30px;
+        }
         
         .menu {
             display: flex;

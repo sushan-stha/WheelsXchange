@@ -31,17 +31,21 @@ function updateNavbarForLoggedInUser(user) {
     // Find the login button list item
     const loginItem = document.querySelector('.menu .login-item');
     
-    if (!loginItem) return;
+    if (!loginItem) {
+        console.error('Login item not found');
+        return;
+    }
     
     // Get user email
     const userEmail = user.email;
+    const userName = userEmail.split('@')[0]; // Get username from email
     
     // Create user profile dropdown
     loginItem.innerHTML = `
         <div class="user-profile-dropdown">
             <div class="user-profile-btn">
-                <div class="user-avatar">${userEmail.charAt(0).toUpperCase()}</div>
-                <span class="user-email">${userEmail}</span>
+                <div class="user-avatar">${userName.charAt(0).toUpperCase()}</div>
+                <span class="user-email">${userName}</span>
                 <i class="fas fa-chevron-down"></i>
             </div>
             <ul class="user-dropdown-menu">
@@ -228,7 +232,7 @@ function showAlert(message, type = 'info') {
     
     alertDiv.style.cssText = `
         position: fixed;
-        top: 80px;
+        top: 90px;
         right: 20px;
         padding: 1rem 1.5rem;
         border-radius: 8px;

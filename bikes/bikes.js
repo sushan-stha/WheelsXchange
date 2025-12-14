@@ -1,4 +1,3 @@
-
 let bikes = [];
 
 // Fetch bikes from Supabase
@@ -18,7 +17,7 @@ async function fetchBikes() {
             model: bike.model,
             year: parseInt(bike.year),
             price: bike.price,
-            type: bike.type || 'Not Specified',
+            
             running: bike.mileage,
             
             image: Array.isArray(bike.image_urls) && bike.image_urls.length > 0
@@ -42,9 +41,7 @@ async function fetchBikes() {
         noResults.style.display = 'block';
     }
 }
-
-// UPDATE THE DOMContentLoaded EVENT LISTENER
-// Find the existing one and replace it with this:
+// Initialize on DOM load
 document.addEventListener('DOMContentLoaded', function() {
     // Fetch bikes from Supabase on page load
     fetchBikes();
@@ -52,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add event listeners for all filter fields
     document.getElementById('searchBar').addEventListener('input', applyFilters);
     if (document.getElementById('brand')) document.getElementById('brand').addEventListener('change', applyFilters);
-    if (document.getElementById('type')) document.getElementById('type').addEventListener('change', applyFilters);
+    
     if (document.getElementById('year')) document.getElementById('year').addEventListener('change', applyFilters);
     if (document.getElementById('minPrice')) document.getElementById('minPrice').addEventListener('input', applyFilters);
     if (document.getElementById('maxPrice')) document.getElementById('maxPrice').addEventListener('input', applyFilters);
@@ -111,7 +108,7 @@ function showAuthAlert() {
                         <h3 class="bike-title">${bike.make} ${bike.model}</h3>
                         <div class="bike-details">
                             <p><strong>Year:</strong> ${bike.year}</p>
-                            <p><strong>Type:</strong> ${bike.type}</p>
+                            
                             <p><strong>Running:</strong> ${bike.running.toLocaleString()} km</p>
                             <p><strong>Seller:</strong> ${bike.seller}</p>
                             <p><strong>Location:</strong> ${bike.location}</p>
@@ -249,7 +246,6 @@ function showAuthAlert() {
 
         function applyFilters() {
             const brand = document.getElementById('brand').value;
-            const type = document.getElementById('type').value;
             const year = document.getElementById('year').value;
             const minPrice = document.getElementById('minPrice').value;
             const maxPrice = document.getElementById('maxPrice').value;
@@ -258,7 +254,7 @@ function showAuthAlert() {
 
             filteredBikes = bikes.filter(bike => {
                 const matchesBrand = !brand || bike.make === brand;
-                const matchesType = !type || bike.type === type;
+                
                 const matchesYear = !year || bike.year.toString() === year;
                 const matchesMinPrice = !minPrice || bike.price >= parseInt(minPrice);
                 const matchesMaxPrice = !maxPrice || bike.price <= parseInt(maxPrice);
@@ -268,7 +264,7 @@ function showAuthAlert() {
                     bike.model.toLowerCase().includes(searchTerm) ||
                     bike.seller.toLowerCase().includes(searchTerm);
 
-                return matchesBrand && matchesType && matchesYear && matchesMinPrice && matchesMaxPrice && matchesRunning && matchesSearch;
+                return matchesBrand && matchesYear && matchesMinPrice && matchesMaxPrice && matchesRunning && matchesSearch;
             });
 
             displayBikes(filteredBikes);
@@ -276,7 +272,6 @@ function showAuthAlert() {
 
         function resetFilters() {
             document.getElementById('brand').value = '';
-            document.getElementById('type').value = '';
             document.getElementById('year').value = '';
             document.getElementById('minPrice').value = '';
             document.getElementById('maxPrice').value = '';

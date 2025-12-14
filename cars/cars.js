@@ -41,14 +41,17 @@ async function fetchCars() {
     }
 }
 
-// UPDATE THE DOMContentLoaded EVENT LISTENER
-// Find the existing one and replace it with this:
+//  DOMContentLoaded EVENT LISTENER
 document.addEventListener('DOMContentLoaded', function() {
     // Fetch cars from Supabase on page load
     fetchCars();
     
-    // Add event listeners for all filter fields
-    document.getElementById('searchBar').addEventListener('input', applyFilters);
+    // Add debounce for search (wait 300ms after user stops typing)
+    let searchTimeout;
+    document.getElementById('searchBar').addEventListener('input', function() {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(applyFilters, 300);
+    });
     if (document.getElementById('brand')) document.getElementById('brand').addEventListener('change', applyFilters);
     if (document.getElementById('type')) document.getElementById('type').addEventListener('change', applyFilters);
     if (document.getElementById('year')) document.getElementById('year').addEventListener('change', applyFilters);

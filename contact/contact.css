@@ -41,11 +41,11 @@
 }
 
 .logo span {
-    /* color: black; */
-    transform: rotate(2deg);
+    color: #000;
+    transform: rotate(5deg);
     display: inline-block;
     position: relative;
-    font-size: larger;
+    font-size: 30px;
 }
 /* navbar logo */
 .logo-container {

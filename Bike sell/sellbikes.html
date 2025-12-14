@@ -5,10 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sell Your Bike - whellesxchange</title>
     <link rel="stylesheet" href="sellbike.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <header class="header">
+    <nav class="nav">
+        <div class="logo-container">
+            <img src="../assets/logo.png" alt="WheelsXChange Logo">
+            <div class="logo">Wheels<span>X</span>Change</div>
+        </div>
+        <ul class="menu">
+            <li><a href="../index.html">Home</a></li>
+            <li class="dropdown">
+                <a href="#buy">Buy</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../cars/cars.html">Cars</a></li>
+                    <li><a href="../bikes/bikes.html">Bikes</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#sell">Sell</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../Car sell/sellcars.html">Sell Car</a></li>
+                    <li><a href="../Bike sell/sellbikes.html">Sell Bike</a></li>
+                </ul>
+            </li>
+            <li><a href="../contact/contatcus.html">Contact</a></li>
+            <!-- This will be dynamically updated by JavaScript -->
+            <li class="login-item">
+                <a href="../login-form/login.html" class="login-btn">Login</a>
+            </li>
+        </ul>
+        <div class="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+</header>
     <div class="container">
-        <div class="header">
+        <div class="header1">
             <h1 style="color: #000;">List your vehicle</h1>
             <p>List your vehicle and get the best offers from verified buyers</p>
         </div>
@@ -150,6 +186,20 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../login-form/supabase-config.js"></script>
     <script src="sellbikes.js"></script>
+    <script src="../home-auth.js"></script>
+    <!-- Mobile Menu Toggle -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const menu = document.querySelector('.menu');
+            
+            if (menuToggle && menu) {
+                menuToggle.addEventListener('click', function() {
+                    menu.classList.toggle('active');
+                });
+            }
+        });
+</script>
 </body>
 </body>
 </html>
