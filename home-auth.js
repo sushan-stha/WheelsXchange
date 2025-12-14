@@ -174,7 +174,7 @@ function addUserProfileStyles() {
             top: 105%;
             right: 0;
             background: white;
-            min-width: 200px;
+            min-width: 160px;
             box-shadow: 0 8px 24px rgba(0,0,0,0.15);
             border-radius: 50px;
             overflow: hidden;
