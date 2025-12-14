@@ -228,6 +228,19 @@
     <script src="../login-form/supabase-config.js"></script>
     <script src="sellcars.js"></script>
     <script src="../home-auth.js"></script>
+    <!-- menu toggle -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuToggle = document.querySelector('.menu-toggle');
+        const menu = document.querySelector('.menu');
+        
+        if (menuToggle && menu) {
+            menuToggle.addEventListener('click', function() {
+                menu.classList.toggle('active');
+            });
+        }
+    });
+</script>
 </body>
 </body>
 </html>
