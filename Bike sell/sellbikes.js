@@ -326,7 +326,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // For alert message if user is not logged in
-// Alert notification function
 function showAlert(message, type = 'info') {
     const alertDiv = document.createElement('div');
     alertDiv.className = 'custom-alert';
@@ -367,7 +366,7 @@ function showAlert(message, type = 'info') {
     }, 3000);
 }
 
-// Add animation styles
+// animation styles
 const style = document.createElement('style');
 style.textContent = `
     @keyframes slideIn {

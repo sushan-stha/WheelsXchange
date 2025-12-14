@@ -40,8 +40,6 @@ async function fetchCars() {
         noResults.style.display = 'block';
     }
 }
-
-//  DOMContentLoaded EVENT LISTENER
 document.addEventListener('DOMContentLoaded', function() {
     // Fetch cars from Supabase on page load
     fetchCars();

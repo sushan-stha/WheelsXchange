@@ -82,13 +82,13 @@ async function handleLogin(e) {
         hideLoadingState();
     }
 }
-// Handle Forgot Password
+//  Forgot Password
 function handleForgotPassword(e) {
     e.preventDefault();
     window.location.href = "./forgot-password.html";
 }
 
-// Handle Signup
+//  Signup
 function handleSignup(e) {
     e.preventDefault();
     window.location.href = "./signup.html";
