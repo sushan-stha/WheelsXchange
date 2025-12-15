@@ -181,6 +181,13 @@
             position: relative;
             font-size: 92px;
         }
+        #x-para{
+            color: #000;
+            transform: rotate(5deg);
+            display: inline-block;
+            position: relative;
+            font-size: 45px;
+        }
 
         .main-content {
             background: #f8f9fa;
