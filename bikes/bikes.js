@@ -3,7 +3,7 @@ let bikes = [];
 // Fetch bikes from Supabase
 async function fetchBikes() {
     try {
-        const { data, error } = await supabase
+        const { data, error } = await supabaseClient
             .from('bike_listings')
             .select('*')
             .order('created_at', { ascending: false });
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Check if user is authenticated
 async function isUserAuthenticated() {
     try {
-        const { data: { session }, error } = await supabase.auth.getSession();
+        const { data: { session }, error } = await supabaseClient.auth.getSession();
         return session && session.user;
     } catch (error) {
         console.error('Auth check error:', error);

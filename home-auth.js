@@ -5,10 +5,10 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 async function checkUserAuth() {
     console.log('checkUserAuth called');
-    console.log('Supabase object:', supabase);
+    console.log('Supabase object:', supabaseClient);
     try {
         // Get current user session
-        const { data: { session }, error } = await supabase.auth.getSession();
+       const { data: { session }, error } = await supabaseClient.auth.getSession();
         
         if (error) {
             console.error('Error checking auth:', error);
@@ -66,7 +66,7 @@ async function handleLogout(e) {
     e.preventDefault();
     
     try {
-        const { error } = await supabase.auth.signOut();
+        const { error } = await supabaseClient.auth.signOut();
         
         if (error) {
             throw error;
