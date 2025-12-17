@@ -3,7 +3,8 @@ let bikes = [];
 // Fetch bikes from Supabase
 async function fetchBikes() {
     try {
-        const { data, error } = await supabaseClient
+        // FIXED: Use window.supabaseClient instead of supabaseClient
+        const { data, error } = await window.supabaseClient
             .from('bike_listings')
             .select('*')
             .order('created_at', { ascending: false });
@@ -29,7 +30,6 @@ async function fetchBikes() {
 
         console.log('✅ Loaded', bikes.length, 'bikes');
         console.log('🖼️ Image URLs:', bikes.map(b => b.image));
-        console.log('📦 Raw image_urls from DB:', data.map(d => d.image_urls));
         filteredBikes = [...bikes];
         displayBikes(bikes);
             
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Check if user is authenticated
 async function isUserAuthenticated() {
     try {
-        const { data: { session }, error } = await supabaseClient.auth.getSession();
+        const { data: { session }, error } = await window.supabaseClient.auth.getSession();
         return session && session.user;
     } catch (error) {
         console.error('Auth check error:', error);
@@ -447,3 +447,68 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+function showAlert(message, type = 'info') {
+    const alertDiv = document.createElement('div');
+    alertDiv.className = 'custom-alert';
+    
+    const colors = {
+        success: 'linear-gradient(135deg, #4CAF50, #45a049)',
+        error: 'linear-gradient(135deg, #e74c3c, #c0392b)',
+        warning: 'linear-gradient(135deg, #ff9800, #f57c00)',
+        info: 'linear-gradient(135deg, #2196F3, #1976D2)'
+    };
+    
+    alertDiv.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px 25px;
+        border-radius: 10px;
+        color: white;
+        z-index: 10000;
+        font-weight: 600;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        background: ${colors[type] || colors.info};
+        animation: slideIn 0.3s ease;
+        max-width: 350px;
+        font-size: 1.1em;
+    `;
+    
+    alertDiv.textContent = message;
+    document.body.appendChild(alertDiv);
+    
+    setTimeout(() => {
+        alertDiv.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => {
+            if (document.body.contains(alertDiv)) {
+                document.body.removeChild(alertDiv);
+            }
+        }, 300);
+    }, 3000);
+}
+
+// animation styles
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideIn {
+        from {
+            transform: translateX(400px);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+    @keyframes slideOut {
+        from {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateX(400px);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(style);

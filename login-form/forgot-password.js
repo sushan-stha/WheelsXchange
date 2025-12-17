@@ -25,7 +25,7 @@ async function handleForgotPassword(e) {
     submitBtn.textContent = 'Sending...';
     
     try {
-        const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
             redirectTo: window.location.origin + '/reset-password.html',
         });
         

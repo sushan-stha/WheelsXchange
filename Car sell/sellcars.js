@@ -176,7 +176,7 @@ async function submitForm() {
     const formData = new FormData(form);
     
     // Check if user is authenticated
-    const { data: { session }, error: authError } = await supabase.auth.getSession();
+    const { data: { session }, error: authError } = await window.supabaseClient.auth.getSession() 
     
     if (!session) {
     showAlert('⚠️ Please login to list your car!', 'error');
@@ -207,14 +207,14 @@ async function submitForm() {
             const filePath = `cars/${fileName}`;
             
             // Upload file to Supabase Storage
-            const { data: uploadData, error: uploadError } = await supabase.storage
+            const { data: uploadData, error: uploadError } = await window.supabaseClient.storage
                 .from('vehicle-image')
                 .upload(filePath, file);
             
             if (uploadError) throw uploadError;
             
             // Get public URL
-            const { data: urlData } = supabase.storage
+            const { data: urlData } = supabaseClient.storage
                 .from('vehicle-image')
                 .getPublicUrl(filePath);
             
@@ -244,7 +244,7 @@ async function submitForm() {
         };
 
         // Insert into Supabase
-        const { data, error } = await supabase
+        const { data, error } = await supabaseClient
             .from('car_listings')
             .insert([listing])
             .select();
