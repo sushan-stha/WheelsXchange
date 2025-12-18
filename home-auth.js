@@ -102,7 +102,13 @@ function addUserProfileStyles() {
         .user-profile-dropdown::after { content: ''; position: absolute; top: 100%; left: 0; right: 0; height: 10px; }
         .menu > .login-item { position: relative; }
         .menu > .login-item .user-profile-dropdown { display: flex; align-items: center; }
-        .user-profile-btn { display: flex; align-items: center; gap: 2px; padding: 1px 1px; background: rgba(255, 255, 255, 0.2); border-radius: 25px; cursor: pointer; transition: all 0.3s; border: 2px solid white; }
+        .user-profile-btn { 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; padding: 1px 1px; background: rgba(255, 255, 255, 0.2); border-radius: 25px; 
+            cursor: pointer; 
+            transition: all 0.3s; 
+            border: 2px solid white; }
         .user-profile-btn:hover { background: white; color: #e47e08; }
         .user-avatar { width: 30px; height: 30px; border-radius: 50%; background: white; color: #ff6b35; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1rem; flex-shrink: 0; }
         .user-email { color: white; font-size: 0.9rem; max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

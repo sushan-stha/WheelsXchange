@@ -167,7 +167,7 @@
             color: white;
         }
 
-        span {
+        #logo-span {
             color: #000;
             transform: rotate(5deg);
             display: inline-block;
