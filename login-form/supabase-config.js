@@ -12,4 +12,4 @@ window.supabaseClient = supabase;
 console.log('✅ Supabase Config Loaded');
 console.log('🔗 URL:', SUPABASE_URL);
 console.log('🔑 Key:', SUPABASE_ANON_KEY.substring(0, 20) + '...');
-console.log('📦 Supabase Client:', supabase);
+console.log('📦 Supabase Client:', supabaseClient);
