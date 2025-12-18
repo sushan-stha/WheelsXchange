@@ -1,10 +1,14 @@
+// sellbikes.js - Single Image Upload Version
+// Initialize uploaded file (single image only)
+let uploadedFile = null;
+
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', function() {
     setupImageUpload();
     setupFormValidation();
     
     // Listen for form submission
-    const sellBikeForm = document.getElementById('sell-bike-form') || document.querySelector('form');
+    const sellBikeForm = document.getElementById('sellCarForm');
     if (sellBikeForm) {
         sellBikeForm.addEventListener('submit', handleBikeListing);
     }
@@ -27,7 +31,7 @@ async function handleBikeListing(e) {
     if (userError || !user) {
         showAlert("You must be logged in to list a bike.", "error");
         setTimeout(() => {
-            window.location.href = 'login.html';
+            window.location.href = '../login-form/login.html';
         }, 2000);
         return;
     }
@@ -36,16 +40,18 @@ async function handleBikeListing(e) {
     
     // Prepare the data object to match your 'bike_listings' table columns
     const bikeData = {
-        user_id: user.id, // Links listing to the logged-in user
         make: formData.get('make'),
         model: formData.get('model'),
         year: formData.get('year'),
         price: parseFloat(formData.get('price')),
         mileage: formData.get('mileage'),
         location: formData.get('location'),
-        seller_name: formData.get('seller_name') || user.email.split('@')[0],
-        // Example handling for multiple images or a single URL
-        image_urls: uploadedFiles.length > 0 ? uploadedFiles : [formData.get('image_url')]
+        seller_name: formData.get('sellerName'),
+        seller_phone: formData.get('phone'),
+        seller_email: formData.get('email'),
+        negotiable: formData.get('negotiable'),
+        // Single image as array (for consistency with existing structure)
+        image_urls: uploadedFile ? [uploadedFile] : []
     };
 
     // Show loading state on button
@@ -66,7 +72,7 @@ async function handleBikeListing(e) {
         
         // Redirect to the bikes gallery page
         setTimeout(() => {
-            window.location.href = 'bikes.html';
+            window.location.href = '../bikes/bikes.html';
         }, 1500);
 
     } catch (error) {
@@ -77,30 +83,39 @@ async function handleBikeListing(e) {
     }
 }
 
-// Logic for handling image previews (from your original file)
-function handleFiles(files) {
+// Logic for handling single image preview
+function handleFile(file) {
     const previewContainer = document.getElementById('previewImages');
     
-    files.forEach(file => {
-        if (file.type.startsWith('image/')) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                const imgContainer = document.createElement('div');
-                imgContainer.className = 'preview-item';
-                imgContainer.innerHTML = `
-                    <img src="${e.target.result}" alt="preview">
-                    <button type="button" class="remove-img">&times;</button>
-                `;
-                previewContainer.appendChild(imgContainer);
-                // In a real app, you would upload to Supabase Storage here
-                uploadedFiles.push(e.target.result); 
-            };
-            reader.readAsDataURL(file);
-        }
-    });
+    if (!previewContainer) {
+        console.error('Preview container not found');
+        return;
+    }
+    
+    // Clear previous image
+    previewContainer.innerHTML = '';
+    uploadedFile = null;
+    
+    if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const imgContainer = document.createElement('div');
+            imgContainer.className = 'preview-item';
+            imgContainer.innerHTML = `
+                <img src="${e.target.result}" alt="preview" style="max-width: 200px; max-height: 200px; object-fit: cover; border-radius: 8px;">
+                <button type="button" class="remove-img" style="position: absolute; top: 5px; right: 5px; background: #f44336; color: white; border: none; border-radius: 50%; width: 30px; height: 30px; cursor: pointer; font-size: 18px; line-height: 1; font-weight: bold;">&times;</button>
+            `;
+            imgContainer.style.cssText = 'position: relative; display: inline-block; margin: 10px;';
+            previewContainer.appendChild(imgContainer);
+            
+            // Store the single image data
+            uploadedFile = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
 }
 
-// Re-use your existing showAlert function for consistency
+// Alert notification function
 function showAlert(message, type = 'info') {
     const alertDiv = document.createElement('div');
     const colors = {
@@ -125,6 +140,98 @@ function showAlert(message, type = 'info') {
     }, 3000);
 }
 
-// Required helper functions from your original code
-function setupImageUpload() { /* your existing drag/drop logic */ }
-function setupFormValidation() { /* your existing validation logic */ }
+// Setup image upload functionality (SINGLE IMAGE ONLY)
+function setupImageUpload() {
+    const imageUpload = document.getElementById('imageUpload');
+    const fileInput = document.getElementById('images');
+    
+    if (!imageUpload || !fileInput) {
+        console.error('Image upload elements not found');
+        return;
+    }
+    
+    // Remove 'multiple' attribute to allow only single file
+    fileInput.removeAttribute('multiple');
+    
+    // Click to upload
+    imageUpload.addEventListener('click', () => {
+        fileInput.click();
+    });
+    
+    // Handle file selection (single file only)
+    fileInput.addEventListener('change', (e) => {
+        if (e.target.files.length > 0) {
+            handleFile(e.target.files[0]); // Only take the first file
+        }
+    });
+    
+    // Drag and drop functionality
+    imageUpload.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        imageUpload.style.borderColor = '#ff6b35';
+        imageUpload.style.background = '#fff5f0';
+    });
+    
+    imageUpload.addEventListener('dragleave', () => {
+        imageUpload.style.borderColor = '#ddd';
+        imageUpload.style.background = '#f9f9f9';
+    });
+    
+    imageUpload.addEventListener('drop', (e) => {
+        e.preventDefault();
+        imageUpload.style.borderColor = '#ddd';
+        imageUpload.style.background = '#f9f9f9';
+        
+        if (e.dataTransfer.files.length > 0) {
+            // Only accept first file
+            handleFile(e.dataTransfer.files[0]);
+        }
+    });
+    
+    // Remove image functionality
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('remove-img')) {
+            const previewContainer = document.getElementById('previewImages');
+            previewContainer.innerHTML = '';
+            uploadedFile = null;
+            fileInput.value = ''; // Clear file input
+        }
+    });
+}
+
+// Setup form validation
+function setupFormValidation() {
+    const form = document.getElementById('sellCarForm');
+    if (!form) {
+        console.error('Form not found');
+        return;
+    }
+    
+    const requiredFields = form.querySelectorAll('[required]');
+    
+    requiredFields.forEach(field => {
+        field.addEventListener('blur', () => {
+            validateField(field);
+        });
+        
+        field.addEventListener('input', () => {
+            if (field.classList.contains('error')) {
+                validateField(field);
+            }
+        });
+    });
+}
+
+function validateField(field) {
+    const errorMsg = field.parentElement.querySelector('.error-message');
+    
+    if (!field.value.trim()) {
+        field.classList.add('error');
+        if (errorMsg) errorMsg.style.display = 'block';
+        return false;
+    } else {
+        field.classList.remove('error');
+        if (errorMsg) errorMsg.style.display = 'none';
+        return true;
+    }
+}
