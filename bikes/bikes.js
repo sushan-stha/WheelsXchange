@@ -2,6 +2,7 @@ let bikes = [];
 
 // Fetch bikes from Supabase
 async function fetchBikes() {
+    const supabase = window.supabaseClient;
     try {
         // FIXED: Use window.supabaseClient instead of supabaseClient
         const { data, error } = await window.supabaseClient

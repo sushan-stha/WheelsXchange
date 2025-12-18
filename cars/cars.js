@@ -2,8 +2,9 @@ let cars = [];
 
 // Fetch cars from Supabase
 async function fetchCars() {
+    const supabase = window.supabaseClient;
     try {
-        const { data, error } = await window.supabaseClient
+        const { data, error } = await window.supabase
             .from('car_listings')
             .select('*')
             .order('created_at', { ascending: false });
