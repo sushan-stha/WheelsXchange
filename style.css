@@ -517,6 +517,7 @@
                 margin-top: 0.5rem;
                 padding: 0.5rem;
                 box-shadow: none;
+                
             }
             .menu .dropdown-menu li {
                 border-bottom: none;
@@ -566,7 +567,19 @@
             .about-text h2 {
                 font-size: 2rem;
             }
+            #logo-span{
+                font-size: 26px;
+
+            }
+            #x-logo{
+                font-size: 64px;
+
+            }
+            #x-para{
+                font-size: 40px;
         }
+    }
+
 
         /* Tablet */
         @media (max-width: 768px) {
@@ -652,6 +665,9 @@
 
         .menu.active .dropdown:hover .dropdown-menu {
             display: block;
+            }
+            .menu .menu-toggle li a{
+                align-items: center;
             }
             
             .head {
@@ -748,8 +764,18 @@
             .footer-col:nth-child(3) {
                 flex: 1 1 45%;
             }
-            
+            #logo-span{
+                font-size: 28px;
+
+            }   
+            #x-logo{
+                font-size: 50px;
+
+            }
+            #x-para{
+                font-size: 39px;
         }
+    }
 
         /* Mobile Large  */
         @media (max-width: 576px) {
@@ -811,8 +837,18 @@
                 margin: 1rem auto;
                 max-height: 300px;
             }
-        }
+            #logo-span{
+                font-size: 24px;
 
+            }
+            #x-logo{
+                font-size: 45px;
+
+            }
+            #x-para{
+                font-size: 37px;
+        }
+    }
         /* Mobile Small (320px to 480px) */
         @media (max-width: 480px) {
             .nav {
@@ -893,7 +929,24 @@
                 min-width: auto;
                 flex: 1 1 45%;
             }
+            #logo-span{
+                font-size: 20px;
+
+            }
+            #x-logo{
+                font-size: 39px;
+
+            }
+            #x-para{
+                font-size: 29px;
         } 
+        .menu-toggle span{
+            gap: 6px;
+            width: 22px;
+            height: 3px;
+            /* width: 10px; */
+        }
+    }
 
         /* Extra Small Mobile (below 320px) */
         @media (max-width: 320px) {
@@ -902,7 +955,13 @@
             }
             
             .logo {
-                font-size: 0.9rem;
+                font-size: 0.75rem;
+            }
+            .logo-container img {
+                width: 35px; 
+                height: auto;
+                margin-right: 3px;
+                
             }
             
             .head {
@@ -968,4 +1027,21 @@
             .footer-col {
                 margin: 0.5rem 0;
             }
+            #logo-span{
+                font-size: 18px;
+
+            }
+            #x-logo{
+                font-size: 32px;
+
+            }
+            #x-para{
+                font-size: 25px;
         }
+        .menu-toggle span{
+            gap: 5px;
+            width: 20px;
+            height: 2px;
+            /* width: 10px; */
+        }
+    }
