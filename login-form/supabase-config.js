@@ -5,7 +5,7 @@
     const SUPABASE_URL = 'https://eoempahzfldeugjbwyrs.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVvZW1wYWh6ZmxkZXVnamJ3eXJzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM3MTM2NjgsImV4cCI6MjA3OTI4OTY2OH0.yviCvvxUz3IzY2Ul8IFrpSfvlJLn2ier6f-tCRUvoNY';
 
-    // Use window.supabaseClient to avoid conflicts with the library name 'supabase'
+   
     window.supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     console.log('✅ Supabase Config Loaded');

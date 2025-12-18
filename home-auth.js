@@ -10,12 +10,16 @@ document.addEventListener('DOMContentLoaded', async function() {
     await checkUserAuth(supabase);
 });
 
-async function checkUserAuth(supabase) {
-    console.log('checkUserAuth called');
-    console.log('Supabase object:', supabase);
+async function checkUserAuth() {
+    // FIX: Define 'supabase' inside the function by grabbing it from the window
+    const supabase = window.supabaseClient; 
     
+    if (!supabase) {
+        console.error('Supabase client not initialized yet');
+        return;
+    }
+
     try {
-        // Get current user session using the passed supabase instance
         const { data: { session }, error } = await supabase.auth.getSession();
         
         if (error) {

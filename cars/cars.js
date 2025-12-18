@@ -2,16 +2,24 @@ let cars = [];
 
 // Fetch cars from Supabase
 async function fetchCars() {
+   
     const supabase = window.supabaseClient;
+    
+    if (!supabase) {
+        console.error("Supabase client not found. check your script tags in HTML.");
+        return;
+    }
+
     try {
-        const { data, error } = await window.supabase
+        
+        const { data, error } = await supabase
             .from('car_listings')
             .select('*')
             .order('created_at', { ascending: false });
 
         if (error) throw error;
 
-        // Transform data to match expected format
+        // Transform data
         cars = data.map(car => ({
             id: car.id,
             make: car.make,
@@ -21,24 +29,24 @@ async function fetchCars() {
             type: car.body_type || 'Not Specified',
             fuel: car.fuel_type || 'Not Specified',
             running: car.mileage,
+            // Flexible image handling (checks if it's an array or string)
             image: car.image_urls && car.image_urls.length > 0 
-            ? (typeof car.image_urls === 'string' ? car.image_urls : car.image_urls[0])
-            : 'https://via.placeholder.com/400x200?text=No+Image',
+                ? (Array.isArray(car.image_urls) ? car.image_urls[0] : car.image_urls)
+                : 'https://via.placeholder.com/400x200?text=No+Image',
             seller: car.seller_name,
             location: car.location
         }));
 
         console.log('✅ Loaded', cars.length, 'cars');
-        console.log('📸 Image URLs:', cars.map(c => c.image));
         filteredCars = [...cars];
         displayCars(cars);
         
     } catch (error) {
         console.error('Error fetching cars:', error);
-        // Show user-friendly message
-        const noResults = document.getElementById('noResults');
-        noResults.textContent = 'Error loading cars. Please refresh the page.';
-        noResults.style.display = 'block';
+        const carList = document.getElementById('car-list');
+        if (carList) {
+            carList.innerHTML = `<div class="error-msg">Error loading cars: ${error.message}</div>`;
+        }
     }
 }
 document.addEventListener('DOMContentLoaded', function() {
